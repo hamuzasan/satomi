@@ -1,26 +1,131 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050508;
+  --foreground: #e5e1e7;
+  --satomi-bg: #050508;
+  --satomi-bg-deep: #020617;
+  --satomi-surface: #131317;
+  --satomi-surface-low: #1b1b1f;
+  --satomi-surface-mid: #1f1f23;
+  --satomi-surface-high: #2a292e;
+  --satomi-surface-highest: #353439;
+  --satomi-cyan: #00f0ff;
+  --satomi-cyan-dim: #00dbe9;
+  --satomi-cyan-soft: #7df4ff;
+  --satomi-cyan-pale: #dbfcff;
+  --satomi-purple: #cf5cff;
+  --satomi-purple-soft: #ecb2ff;
+  --satomi-text: #e5e1e7;
+  --satomi-muted: #b9cacb;
+  --satomi-outline: #3b494b;
+  --satomi-error: #ffb4ab;
+  --satomi-error-deep: #93000a;
+  --satomi-green: #10b981;
+  --satomi-amber: #f59e0b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-satomi-bg: var(--satomi-bg);
+  --color-satomi-bg-deep: var(--satomi-bg-deep);
+  --color-satomi-surface: var(--satomi-surface);
+  --color-satomi-surface-low: var(--satomi-surface-low);
+  --color-satomi-surface-mid: var(--satomi-surface-mid);
+  --color-satomi-surface-high: var(--satomi-surface-high);
+  --color-satomi-surface-highest: var(--satomi-surface-highest);
+  --color-satomi-cyan: var(--satomi-cyan);
+  --color-satomi-cyan-dim: var(--satomi-cyan-dim);
+  --color-satomi-cyan-soft: var(--satomi-cyan-soft);
+  --color-satomi-cyan-pale: var(--satomi-cyan-pale);
+  --color-satomi-purple: var(--satomi-purple);
+  --color-satomi-purple-soft: var(--satomi-purple-soft);
+  --color-satomi-text: var(--satomi-text);
+  --color-satomi-muted: var(--satomi-muted);
+  --color-satomi-outline: var(--satomi-outline);
+  --color-satomi-error: var(--satomi-error);
+  --color-satomi-error-deep: var(--satomi-error-deep);
+  --color-satomi-green: var(--satomi-green);
+  --color-satomi-amber: var(--satomi-amber);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-plus-jakarta);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--satomi-bg);
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% -15%, rgba(0, 240, 255, 0.12), transparent 38rem),
+    radial-gradient(circle at 100% 15%, rgba(207, 92, 255, 0.10), transparent 28rem),
+    linear-gradient(180deg, #050508 0%, #020617 48%, #050508 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.35);
+  color: var(--satomi-cyan-pale);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.satomi-ambient {
+  background:
+    radial-gradient(circle at 18% 4%, rgba(0, 240, 255, 0.14), transparent 24rem),
+    radial-gradient(circle at 92% 18%, rgba(207, 92, 255, 0.12), transparent 28rem),
+    linear-gradient(180deg, rgba(5, 5, 8, 0.96), rgba(2, 6, 23, 0.98));
+}
+
+.satomi-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, transparent, black 14%, black 72%, transparent);
+}
+
+.satomi-glow-text {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.55), 0 0 28px rgba(0, 240, 255, 0.25);
+}
+
+.satomi-card-shine::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 45%;
+  height: 1px;
+  border-top-left-radius: inherit;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.75), transparent);
+}
+
+.satomi-card-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 1px;
+  height: 45%;
+  border-top-left-radius: inherit;
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.75), transparent);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
 }
