@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Deteksi Transaksi Otomatis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#353439",
+                        "inverse-on-surface": "#303034",
+                        "surface-container-high": "#2a292e",
+                        "on-secondary-container": "#480063",
+                        "on-surface": "#e5e1e7",
+                        "on-primary-fixed-variant": "#004f54",
+                        "tertiary-fixed-dim": "#cac1ed",
+                        "on-tertiary-fixed": "#1d1639",
+                        "on-background": "#e5e1e7",
+                        "on-surface-variant": "#b9cacb",
+                        "on-primary-fixed": "#002022",
+                        "on-primary-container": "#006970",
+                        "outline-variant": "#3b494b",
+                        "surface": "#131317",
+                        "surface-container-low": "#1b1b1f",
+                        "primary": "#dbfcff",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#006970",
+                        "background": "#131317",
+                        "primary-fixed": "#7df4ff",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-tertiary-fixed-variant": "#484267",
+                        "on-secondary-fixed": "#320047",
+                        "surface-container-lowest": "#0e0e12",
+                        "secondary": "#ecb2ff",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "error-container": "#93000a",
+                        "on-primary": "#00363a",
+                        "inverse-surface": "#e5e1e7",
+                        "surface-dim": "#131317",
+                        "on-tertiary": "#322b4f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1f1f23",
+                        "outline": "#849495",
+                        "tertiary": "#faf4ff",
+                        "on-tertiary-container": "#615a81",
+                        "surface-tint": "#00dbe9",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "surface-bright": "#39393d",
+                        "primary-container": "#00f0ff",
+                        "on-secondary": "#520071",
+                        "surface-container-highest": "#353439",
+                        "secondary-container": "#cf5cff",
+                        "tertiary-container": "#ddd4ff",
+                        "secondary-fixed": "#f8d8ff",
+                        "tertiary-fixed": "#e6deff",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .glass-panel {
+            background: rgba(42, 41, 46, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        .glow-accent {
+            box-shadow: 0 0 40px rgba(0, 219, 233, 0.15);
+        }
+
+        .border-glow {
+            position: relative;
+        }
+        .border-glow::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0,219,233,0.5) 0%, rgba(0,0,0,0) 50%, rgba(236,178,255,0.2) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        /* Custom Checkbox & Toggle Styles */
+        .custom-toggle:checked {
+            background-color: theme('colors.primary-fixed-dim');
+        }
+        .custom-toggle:checked + div {
+            transform: translateX(100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<!-- Ambient Background Glows -->
+<div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary/5 blur-[120px] pointer-events-none z-0"></div>
+<div class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-secondary/5 blur-[100px] pointer-events-none z-0"></div>
+<!-- Top Navigation Anchor (Suppressed nav icons for transactional page) -->
+<header class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-6 flex items-center justify-between z-50 relative">
+<button aria-label="Go Back" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg font-extrabold tracking-tighter text-primary dark:text-primary-fixed drop-shadow-[0_0_10px_rgba(0,219,233,0.5)]">
+            SATOMI
+        </div>
+<div class="w-10 h-10"></div> <!-- Spacer for balance -->
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-2xl mx-auto px-margin-mobile md:px-0 flex-1 flex flex-col py-8 z-10 relative">
+<div class="text-center mb-10">
+<span class="material-symbols-outlined text-primary-fixed-dim text-5xl mb-4 drop-shadow-[0_0_15px_rgba(0,219,233,0.6)]" data-weight="fill">shield_person</span>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg mb-3">Deteksi Transaksi Otomatis</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">Fitur ini membaca notifikasi transaksi dengan izinmu untuk mengkategorikan pengeluaran secara cerdas.</p>
+</div>
+<!-- Privacy Warning Card -->
+<div class="glass-panel border-glow rounded-xl p-6 mb-8 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 transform translate-x-4 -translate-y-4 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-8xl text-primary" data-weight="fill">lock</span>
+</div>
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20">
+<span class="material-symbols-outlined text-primary-fixed-dim">verified_user</span>
+</div>
+<div>
+<h3 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2">Komitmen Privasi</h3>
+<p class="font-body-md text-body-md text-on-surface/90 leading-relaxed">Kami menggunakan pemrosesan on-device AI. Data sensitif tidak pernah meninggalkan perangkat Anda. Satomi hanya membaca pola teks spesifik dari aplikasi perbankan yang didukung.</p>
+</div>
+</div>
+</div>
+<!-- Data Transparency Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+<!-- What we read -->
+<div class="glass-panel rounded-xl p-6 border-l-2 border-l-primary-fixed-dim bg-gradient-to-br from-surface-container-high/50 to-transparent">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-weight="fill">check_circle</span>
+<h4 class="font-label-sm text-label-sm uppercase text-on-surface">Data yang dapat dibaca</h4>
+</div>
+<ul class="space-y-3 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant/50 text-sm">payments</span>
+                        Nominal Transaksi
+                    </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant/50 text-sm">storefront</span>
+                        Sumber/Merchant
+                    </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant/50 text-sm">schedule</span>
+                        Waktu Transaksi
+                    </li>
+</ul>
+</div>
+<!-- What we DONT read -->
+<div class="glass-panel rounded-xl p-6 border-l-2 border-l-error/70 bg-gradient-to-br from-surface-container-high/50 to-transparent">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-error text-sm" data-weight="fill">cancel</span>
+<h4 class="font-label-sm text-label-sm uppercase text-on-surface">Data yang TIDAK dibaca</h4>
+</div>
+<ul class="space-y-3 font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error/50 text-sm">password</span>
+                        Password / PIN
+                    </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error/50 text-sm">sms</span>
+                        Kode OTP
+                    </li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error/50 text-sm">account_box</span>
+                        Pesan Pribadi
+                    </li>
+</ul>
+</div>
+</div>
+<!-- Interaction Controls -->
+<div class="space-y-6 bg-surface-container-low/50 p-6 rounded-xl border border-white/5 mb-10">
+<!-- Toggle -->
+<label class="flex items-center justify-between cursor-pointer group">
+<div>
+<div class="font-display-lg text-lg text-on-surface mb-1">Aktifkan deteksi otomatis</div>
+<div class="font-body-md text-sm text-on-surface-variant">Izinkan akses notifikasi di pengaturan sistem</div>
+</div>
+<div class="relative">
+<input class="sr-only custom-toggle" id="auto-detect-toggle" type="checkbox"/>
+<div class="block bg-surface-variant w-14 h-8 rounded-full border border-white/10 transition-colors duration-300"></div>
+<div class="dot absolute left-1 top-1 bg-on-surface w-6 h-6 rounded-full transition-transform duration-300 shadow-md"></div>
+</div>
+</label>
+<div class="w-full h-[1px] bg-white/5"></div>
+<!-- Consent Checkbox -->
+<label class="flex items-start gap-4 cursor-pointer group">
+<div class="relative flex items-center justify-center mt-1">
+<input class="peer appearance-none w-5 h-5 border-2 border-outline-variant rounded bg-surface-variant/50 checked:bg-primary-fixed-dim checked:border-primary-fixed-dim transition-colors cursor-pointer" id="consent-checkbox" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-on-primary-fixed opacity-0 peer-checked:opacity-100 pointer-events-none text-[16px]" data-weight="fill">check</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors select-none">
+                    Saya memahami data yang akan diproses dan menyetujui kebijakan privasi Satomi.
+                </div>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4 mt-auto md:mt-0 pb-8 md:pb-0">
+<button class="w-full py-4 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider font-bold hover:shadow-[0_0_20px_rgba(0,219,233,0.4)] transition-all duration-300 relative overflow-hidden group opacity-50 cursor-not-allowed" disabled="" id="primary-action-btn">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                Aktifkan dengan Izin
+            </button>
+<button class="w-full py-4 rounded-lg bg-transparent border border-outline-variant text-on-surface font-label-sm text-label-sm uppercase tracking-wider hover:bg-surface-variant/50 hover:border-primary/50 transition-all duration-300">
+                Nanti Saja
+            </button>
+</div>
+</main>
+<script>
+        // Simple logic to enable the main button only if the checkbox is checked
+        const consentCheckbox = document.getElementById('consent-checkbox');
+        const primaryActionBtn = document.getElementById('primary-action-btn');
+        const toggleBtn = document.getElementById('auto-detect-toggle');
+
+        function updateButtonState() {
+            if (consentCheckbox.checked && toggleBtn.checked) {
+                primaryActionBtn.disabled = false;
+                primaryActionBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                primaryActionBtn.classList.add('glow-accent');
+            } else {
+                primaryActionBtn.disabled = true;
+                primaryActionBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                primaryActionBtn.classList.remove('glow-accent');
+            }
+        }
+
+        consentCheckbox.addEventListener('change', updateButtonState);
+        toggleBtn.addEventListener('change', updateButtonState);
+    </script>
+</body></html>

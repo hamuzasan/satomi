@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SATOMI - AI Financial Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#320047",
+                        "on-tertiary": "#322b4f",
+                        "inverse-primary": "#006970",
+                        "surface": "#131317",
+                        "primary": "#dbfcff",
+                        "outline": "#849495",
+                        "on-tertiary-fixed-variant": "#484267",
+                        "background": "#050508",
+                        "on-primary": "#00363a",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "primary-container": "#00f0ff",
+                        "on-surface-variant": "#b9cacb",
+                        "primary-fixed": "#7df4ff",
+                        "tertiary": "#faf4ff",
+                        "on-primary-fixed-variant": "#004f54",
+                        "on-secondary-container": "#480063",
+                        "outline-variant": "#3b494b",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#615a81",
+                        "surface-container-highest": "#353439",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "surface-container-lowest": "#0e0e12",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#cac1ed",
+                        "inverse-surface": "#e5e1e7",
+                        "secondary-fixed": "#f8d8ff",
+                        "secondary-container": "#cf5cff",
+                        "surface-variant": "#353439",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-primary-fixed": "#002022",
+                        "on-error": "#690005",
+                        "surface-dim": "#131317",
+                        "surface-bright": "#39393d",
+                        "surface-container-high": "#2a292e",
+                        "on-tertiary-fixed": "#1d1639",
+                        "tertiary-container": "#ddd4ff",
+                        "on-primary-container": "#006970",
+                        "inverse-on-surface": "#303034",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e1e7",
+                        "surface-tint": "#00dbe9",
+                        "surface-container": "#1f1f23",
+                        "on-secondary": "#520071",
+                        "surface-container-low": "#1b1b1f",
+                        "secondary": "#ecb2ff",
+                        "on-background": "#e5e1e7",
+                        "tertiary-fixed": "#e6deff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "headline-lg": ["40px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "1.0", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #050508; color: #e5e1e7; }
+        .glass-card {
+            background: rgba(42, 41, 46, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+            border-top-left-radius: inherit;
+        }
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 30%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.8), transparent);
+            border-top-left-radius: inherit;
+        }
+        .glass-card-highlight {
+            border: 1.5px solid transparent;
+            background-clip: padding-box;
+            border-radius: 0.75rem;
+        }
+        .glass-card-highlight::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            padding: 1.5px;
+            background: linear-gradient(135deg, #00f0ff, #cf5cff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .glass-card-highlight::after { display: none; }
+        
+        .btn-primary {
+            background-color: #00f0ff;
+            color: #002022;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, #00f0ff, #ecb2ff) 1;
+            color: #e5e1e7;
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #00f0ff, #cf5cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-glow {
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+        }
+        .glow-bg {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+        .glow-bg-cyan {
+            background: radial-gradient(circle, rgba(0,240,255,0.2) 0%, rgba(0,0,0,0) 70%);
+        }
+        .glow-bg-violet {
+            background: radial-gradient(circle, rgba(207,92,255,0.2) 0%, rgba(0,0,0,0) 70%);
+        }
+        .light-trail {
+            background: linear-gradient(90deg, transparent, rgba(0,240,255,0.8), transparent);
+            height: 2px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0,240,255,0.5);
+        }
+        .bar-glow {
+            box-shadow: 0 0 20px currentColor;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative overflow-x-hidden font-body-md bg-background text-on-surface">
+<!-- Background Glow Spots -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[-1]">
+<div class="glow-bg glow-bg-cyan top-[-10%] left-[-10%] w-[500px] h-[500px]"></div>
+<div class="glow-bg glow-bg-violet top-[40%] right-[-10%] w-[600px] h-[600px]"></div>
+<div class="glow-bg glow-bg-cyan bottom-[-10%] left-[20%] w-[400px] h-[400px]"></div>
+</div>
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-background/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+<div class="flex items-center gap-3">
+<img alt="SATOMI Logo" class="w-8 h-8 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.5)]" src="https://lh3.googleusercontent.com/aida/AP1WRLsJVqVqMWyb5C-YYSxLLgFzgraxmpqf7N2I_pYD0eLMhAhgdBQMJjAhbyh0_ttsmUB2qeRfv7LXa6-I45jLuBNIhHLxjJxa5zC1F4qsJNhJonrJYTDMOdDyG7DC2tLJVVyH5IZ_FoVaqPqXxwd5pgmEE9Nt_LLNaHpwfCjs8YWnA1TGP5nZgMmFodWCZQgZ1q9X46Ns4Pvd6yZi0bdKcA0DQ6Bqvyc1XTNq7tw1IvAY6GUE7MiLl0pN8_s"/>
+<span class="font-display-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-primary drop-shadow-[0_0_10px_rgba(0,240,255,0.4)]">SATOMI</span>
+</div>
+<button class="btn-primary px-4 py-2 rounded-md font-label-sm uppercase tracking-wider">Coba SATOMI</button>
+</header>
+<main class="flex-grow pt-24 pb-32 px-margin-mobile md:px-margin-desktop max-w-[1280px] mx-auto w-full">
+<!-- Hero Section -->
+<section class="relative flex flex-col md:flex-row items-center justify-between gap-16 mt-20 mb-40">
+<div class="absolute inset-0 z-[-1] flex justify-center items-center opacity-50">
+<div class="w-[800px] h-[800px] rounded-full bg-gradient-to-r from-primary-container/10 to-secondary-container/10 blur-3xl"></div>
+</div>
+<div class="md:w-1/2 z-10 flex flex-col gap-8">
+<h1 class="font-headline-lg-mobile md:font-display-lg text-on-background hero-glow leading-tight">
+                    Catat keuangan cukup lewat <span class="text-gradient">chat.</span>
+</h1>
+<p class="font-body-md text-on-surface-variant text-xl leading-relaxed">
+                    SATOMI membantu kamu mencatat transaksi harian, membagi budget ke Smart Pockets, dan memberi peringatan halus sebelum pengeluaran kebablasan.
+                </p>
+<div class="mt-4">
+<button class="btn-primary px-8 py-4 rounded-md font-label-sm uppercase tracking-wider text-sm flex items-center gap-2 transition-transform hover:-translate-y-1">
+                        Mulai Sekarang <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="md:w-1/2 relative w-full flex justify-center">
+<!-- Light trail behind mockup -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-1 bg-gradient-to-r from-transparent via-primary to-transparent blur-sm transform -rotate-12 opacity-70"></div>
+<!-- Mockup Card -->
+<div class="glass-card glass-card-highlight p-6 w-full max-w-sm relative z-10 shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-2xl bg-surface-container-high/40">
+<!-- Chat Bubbles -->
+<div class="flex flex-col gap-4 mb-6">
+<div class="self-end bg-surface-container-high text-on-surface px-4 py-3 rounded-2xl rounded-tr-sm max-w-[80%] text-sm border border-white/5 shadow-lg">
+                            Tadi keluar 35 ribu buat ayam geprek
+                        </div>
+<div class="self-start flex gap-3">
+<img alt="SATOMI Avatar" class="w-8 h-8 rounded-full shadow-[0_0_15px_rgba(0,240,255,0.4)] shrink-0" src="https://lh3.googleusercontent.com/aida/AP1WRLsJVqVqMWyb5C-YYSxLLgFzgraxmpqf7N2I_pYD0eLMhAhgdBQMJjAhbyh0_ttsmUB2qeRfv7LXa6-I45jLuBNIhHLxjJxa5zC1F4qsJNhJonrJYTDMOdDyG7DC2tLJVVyH5IZ_FoVaqPqXxwd5pgmEE9Nt_LLNaHpwfCjs8YWnA1TGP5nZgMmFodWCZQgZ1q9X46Ns4Pvd6yZi0bdKcA0DQ6Bqvyc1XTNq7tw1IvAY6GUE7MiLl0pN8_s"/>
+<div class="bg-primary/10 border border-primary/30 text-primary px-4 py-3 rounded-2xl rounded-tl-sm max-w-[90%] text-sm shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+                                Aku deteksi ini sebagai pengeluaran makanan Rp35.000. Mau aku catat?
+                            </div>
+</div>
+</div>
+<!-- Transaction Preview -->
+<div class="bg-surface-container-low/80 backdrop-blur-md rounded-lg p-4 border border-outline-variant mb-4 shadow-inner">
+<div class="flex justify-between items-center mb-3">
+<span class="font-label-sm text-outline uppercase tracking-wider">Preview</span>
+<span class="material-symbols-outlined text-primary text-sm drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]">receipt_long</span>
+</div>
+<div class="text-3xl font-headline-lg-mobile text-on-surface mb-2 tracking-tight">Rp35.000</div>
+<div class="flex flex-col gap-2 text-sm text-on-surface-variant">
+<div class="flex justify-between items-center border-b border-white/5 pb-2">
+<span>Kategori</span>
+<span class="text-on-surface font-medium">Makanan</span>
+</div>
+<div class="flex justify-between items-center pt-1">
+<span>Pocket</span>
+<span class="text-on-surface flex items-center gap-2 font-medium"><div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(0,240,255,0.8)]"></div> Kebutuhan Harian</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex gap-4 mt-6">
+<button class="btn-primary flex-1 py-3 rounded-md font-label-sm uppercase text-xs tracking-wider">Simpan</button>
+<button class="bg-surface-container-high/50 border border-outline-variant text-on-surface flex-1 py-3 rounded-md font-label-sm uppercase text-xs hover:bg-surface-container-highest transition-colors hover:border-white/20">Edit</button>
+</div>
+</div>
+</div>
+</section>
+<div class="light-trail mb-32 opacity-50"></div>
+<!-- Pain Points Section -->
+<section class="mb-40">
+<div class="text-center mb-16 relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-secondary-container/10 rounded-full blur-3xl z-[-1]"></div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-on-background hero-glow">Kenapa aplikasi keuangan sering <span class="text-gradient">ditinggalkan?</span></h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+<div class="glass-card rounded-xl p-8 flex items-start gap-6 hover:-translate-y-2 transition-transform duration-300 group">
+<div class="w-14 h-14 rounded-full bg-error-container/20 flex items-center justify-center text-error shrink-0 border border-error/20 group-hover:shadow-[0_0_20px_rgba(255,180,171,0.3)] transition-shadow">
+<span class="material-symbols-outlined text-2xl">forms_add_on</span>
+</div>
+<div>
+<h3 class="font-label-sm uppercase text-on-surface tracking-wider mb-2 text-sm">Terlalu banyak form</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Mengisi kategori, tanggal, dan catatan secara manual untuk setiap transaksi sangat memakan waktu.</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex items-start gap-6 hover:-translate-y-2 transition-transform duration-300 group">
+<div class="w-14 h-14 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary shrink-0 border border-secondary/20 group-hover:shadow-[0_0_20px_rgba(236,178,255,0.3)] transition-shadow">
+<span class="material-symbols-outlined text-2xl">work</span>
+</div>
+<div>
+<h3 class="font-label-sm uppercase text-on-surface tracking-wider mb-2 text-sm">Terasa seperti tugas</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Manajemen keuangan terasa seperti beban pekerjaan tambahan, bukan kebiasaan yang menyenangkan.</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex items-start gap-6 hover:-translate-y-2 transition-transform duration-300 group">
+<div class="w-14 h-14 rounded-full bg-surface-variant/50 flex items-center justify-center text-outline shrink-0 border border-outline/20 group-hover:shadow-[0_0_20px_rgba(132,148,149,0.3)] transition-shadow">
+<span class="material-symbols-outlined text-2xl">visibility_off</span>
+</div>
+<div>
+<h3 class="font-label-sm uppercase text-on-surface tracking-wider mb-2 text-sm">Tidak memberi konteks</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Angka-angka saja tidak cukup. Kamu butuh insight cerdas tentang kebiasaan pengeluaranmu.</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-8 flex items-start gap-6 hover:-translate-y-2 transition-transform duration-300 group">
+<div class="w-14 h-14 rounded-full bg-primary-container/20 flex items-center justify-center text-primary shrink-0 border border-primary/20 group-hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-shadow">
+<span class="material-symbols-outlined text-2xl">robot_2</span>
+</div>
+<div>
+<h3 class="font-label-sm uppercase text-on-surface tracking-wider mb-2 text-sm">Tidak terasa personal</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Aplikasi tradisional tidak belajar dari perilakumu atau memberikan saran yang proaktif.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Smart Pockets Section -->
+<section class="mb-40 flex flex-col md:flex-row items-center gap-16">
+<div class="md:w-1/3">
+<div class="relative inline-block mb-4">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-on-background relative z-10 hero-glow">Smart Pockets</h2>
+<div class="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-primary to-transparent"></div>
+</div>
+<p class="text-on-surface-variant mb-8 text-lg leading-relaxed">Alokasi dana otomatis berdasarkan kebiasaan transaksimu. SATOMI menjaga agar kamu tetap on track.</p>
+<ul class="flex flex-col gap-4 font-label-sm uppercase text-sm tracking-wider">
+<li class="flex items-center gap-3 text-primary"><div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_10px_currentColor]"></div> Harian</li>
+<li class="flex items-center gap-3 text-error"><div class="w-3 h-3 rounded-full bg-error shadow-[0_0_10px_currentColor]"></div> Tagihan</li>
+<li class="flex items-center gap-3 text-[#34d399]"><div class="w-3 h-3 rounded-full bg-[#34d399] shadow-[0_0_10px_currentColor]"></div> Tabungan</li>
+<li class="flex items-center gap-3 text-secondary"><div class="w-3 h-3 rounded-full bg-secondary shadow-[0_0_10px_currentColor]"></div> Self-Reward</li>
+<li class="flex items-center gap-3 text-[#fbbf24]"><div class="w-3 h-3 rounded-full bg-[#fbbf24] shadow-[0_0_10px_currentColor]"></div> Darurat</li>
+</ul>
+</div>
+<div class="md:w-2/3 w-full glass-card rounded-2xl p-10 h-[400px] flex items-end justify-around gap-6 relative overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface/80 z-0"></div>
+<!-- Bars -->
+<div class="w-20 bg-gradient-to-t from-primary/20 to-primary rounded-t-xl h-[80%] relative group z-10 shadow-[0_0_30px_rgba(0,240,255,0.3)] transition-all hover:brightness-125">
+<div class="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-t-xl mix-blend-overlay"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-label-sm text-primary drop-shadow-[0_0_5px_currentColor] text-lg">80%</div>
+</div>
+<div class="w-20 bg-gradient-to-t from-error/20 to-error rounded-t-xl h-[40%] relative group z-10 shadow-[0_0_30px_rgba(255,180,171,0.3)] transition-all hover:brightness-125">
+<div class="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-t-xl mix-blend-overlay"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-label-sm text-error drop-shadow-[0_0_5px_currentColor] text-lg">40%</div>
+</div>
+<div class="w-20 bg-gradient-to-t from-[#34d399]/20 to-[#34d399] rounded-t-xl h-[60%] relative group z-10 shadow-[0_0_30px_rgba(52,211,153,0.3)] transition-all hover:brightness-125">
+<div class="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-t-xl mix-blend-overlay"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-label-sm text-[#34d399] drop-shadow-[0_0_5px_currentColor] text-lg">60%</div>
+</div>
+<div class="w-20 bg-gradient-to-t from-secondary/20 to-secondary rounded-t-xl h-[30%] relative group z-10 shadow-[0_0_30px_rgba(236,178,255,0.3)] transition-all hover:brightness-125">
+<div class="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-t-xl mix-blend-overlay"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-label-sm text-secondary drop-shadow-[0_0_5px_currentColor] text-lg">30%</div>
+</div>
+<div class="w-20 bg-gradient-to-t from-[#fbbf24]/20 to-[#fbbf24] rounded-t-xl h-[10%] relative group z-10 shadow-[0_0_30px_rgba(251,191,36,0.3)] transition-all hover:brightness-125">
+<div class="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-t-xl mix-blend-overlay"></div>
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity font-label-sm text-[#fbbf24] drop-shadow-[0_0_5px_currentColor] text-lg">10%</div>
+</div>
+<!-- Baseline -->
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-white/20 shadow-[0_0_10px_rgba(255,255,255,0.5)] z-0"></div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="text-center py-32 relative">
+<div class="glow-bg glow-bg-cyan left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-30"></div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-on-background mb-10 relative z-10 hero-glow">Siap mengelola keuangan dengan cerdas?</h2>
+<button class="btn-primary px-12 py-6 rounded-md font-label-sm uppercase tracking-wider text-xl shadow-[0_0_40px_rgba(0,240,255,0.4)] relative z-10 hover:scale-105 transition-transform duration-300">Coba SATOMI</button>
+</section>
+</main>
+<footer class="border-t border-white/10 py-10 text-center text-on-surface-variant font-label-sm text-xs bg-surface/50 backdrop-blur-md">
+<p>© 2024 SATOMI AI Financial Assistant. All rights reserved.</p>
+</footer>
+</body></html>

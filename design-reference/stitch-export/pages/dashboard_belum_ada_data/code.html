@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SATOMI - Belum ada data keuangan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#320047",
+                        "on-tertiary-fixed": "#1d1639",
+                        "secondary-fixed": "#f8d8ff",
+                        "on-tertiary-container": "#615a81",
+                        "on-surface": "#e5e1e7",
+                        "on-error": "#690005",
+                        "primary": "#dbfcff",
+                        "on-primary-fixed-variant": "#004f54",
+                        "inverse-on-surface": "#303034",
+                        "tertiary-fixed": "#e6deff",
+                        "inverse-surface": "#e5e1e7",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#cac1ed",
+                        "on-secondary-container": "#480063",
+                        "surface-container-low": "#1b1b1f",
+                        "surface-bright": "#39393d",
+                        "background": "#131317",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353439",
+                        "outline": "#849495",
+                        "on-secondary": "#520071",
+                        "surface-variant": "#353439",
+                        "primary-container": "#00f0ff",
+                        "tertiary-container": "#ddd4ff",
+                        "on-primary": "#00363a",
+                        "surface-container-lowest": "#0e0e12",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#7df4ff",
+                        "on-primary-fixed": "#002022",
+                        "inverse-primary": "#006970",
+                        "surface-container-high": "#2a292e",
+                        "secondary": "#ecb2ff",
+                        "on-primary-container": "#006970",
+                        "tertiary": "#faf4ff",
+                        "surface": "#131317",
+                        "surface-tint": "#00dbe9",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "on-background": "#e5e1e7",
+                        "primary-fixed-dim": "#00dbe9",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "secondary-container": "#cf5cff",
+                        "surface-dim": "#131317",
+                        "outline-variant": "#3b494b",
+                        "on-tertiary-fixed-variant": "#484267",
+                        "surface-container": "#1f1f23",
+                        "on-tertiary": "#322b4f",
+                        "on-surface-variant": "#b9cacb"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "label-sm": ["12px", { lineHeight: "1.0", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-lg": ["40px", { lineHeight: "1.2", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050508;
+            background-image: 
+                linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        .glowing-orb {
+            animation: pulse-glow 4s infinite alternate ease-in-out;
+        }
+        
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.4); transform: scale(1); }
+            100% { box-shadow: 0 0 50px rgba(0, 240, 255, 0.8), inset 0 0 25px rgba(0, 240, 255, 0.8); transform: scale(1.05); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-hidden pb-24 md:pb-0">
+<!-- TopAppBar (Mobile Only) -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl dark:bg-surface/60 border-b border-outline-variant/20 shadow-[0_4px_20px_rgba(0,0,0,0.4)] md:hidden">
+<div class="flex justify-between items-center px-6 h-16 w-full">
+<button aria-label="Language" class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="language_pws">language</span>
+</button>
+<h1 class="font-display-lg text-headline-lg-mobile tracking-tighter text-primary-container drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">SATOMI</h1>
+<button aria-label="Notifications" class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop Only) -->
+<nav class="hidden md:flex flex-col h-full py-8 w-72 rounded-r-[32px] bg-surface-container-lowest/90 backdrop-blur-2xl dark:bg-surface-container-lowest/90 border-r border-outline-variant/20 shadow-2xl fixed left-0 top-0 z-40">
+<div class="px-6 mb-10 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="person">person</span>
+</div>
+<div>
+<h2 class="font-display-lg text-headline-lg-mobile text-primary-container text-lg">SATOMI AI</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Institutional Mode</p>
+<p class="font-label-sm text-label-sm text-outline-variant text-xs mt-1">v2.0.4</p>
+</div>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-4 font-body-md text-body-md bg-secondary-container/20 text-secondary-fixed border-l-4 border-secondary-fixed py-3 px-6 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 font-body-md text-body-md text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+                    Chat
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 font-body-md text-body-md text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+                    Pockets
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 font-body-md text-body-md text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                    Riwayat
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 font-body-md text-body-md text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                    Profil
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full h-full md:pl-72 pt-20 md:pt-0 flex items-center justify-center p-6 min-h-screen">
+<div class="max-w-xl w-full">
+<!-- Glassmorphism Container -->
+<div class="relative bg-surface/40 backdrop-blur-[12px] border border-outline-variant/30 rounded-3xl p-8 md:p-12 text-center shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden">
+<!-- Light Streak Accent -->
+<div class="absolute top-0 left-0 w-32 h-[1px] bg-gradient-to-r from-primary-container to-transparent"></div>
+<div class="absolute top-0 left-0 w-[1px] h-32 bg-gradient-to-b from-primary-container to-transparent"></div>
+<!-- Glowing Orb / Avatar -->
+<div class="relative w-32 h-32 mx-auto mb-8">
+<div class="absolute inset-0 bg-primary-container rounded-full opacity-20 blur-2xl glowing-orb"></div>
+<div class="relative w-full h-full rounded-full border-2 border-primary-container/50 bg-surface flex items-center justify-center overflow-hidden shadow-[inset_0_0_20px_rgba(0,240,255,0.2)]">
+<span class="material-symbols-outlined text-6xl text-primary-container drop-shadow-[0_0_10px_rgba(0,240,255,0.8)]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<!-- Chat Bubble Badge -->
+<div class="absolute -top-2 -right-2 bg-secondary-container text-on-secondary-container rounded-full w-10 h-10 flex items-center justify-center border-2 border-surface shadow-lg">
+<span class="material-symbols-outlined text-xl" data-icon="chat_bubble">chat_bubble</span>
+</div>
+</div>
+<!-- Text Content -->
+<h2 class="font-display-lg text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-4">
+                    Belum ada data keuangan
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10 max-w-md mx-auto">
+                    Mulai dengan mencatat transaksi pertama lewat chat. Satomi akan membantu mengisi data secara otomatis.
+                </p>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto bg-primary-container text-on-primary-container font-label-sm text-label-sm px-8 py-4 rounded-xl hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="edit_square">edit_square</span>
+                        Catat Transaksi Pertama
+                    </button>
+<button class="w-full sm:w-auto bg-transparent text-on-surface font-label-sm text-label-sm px-8 py-4 rounded-xl border-2 border-outline-variant hover:border-primary-container hover:text-primary-container transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-primary-container/0 via-primary-container/10 to-secondary-container/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<span class="material-symbols-outlined relative z-10" data-icon="settings">settings</span>
+<span class="relative z-10">Atur Smart Pockets</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full rounded-t-[24px] z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface/80 border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,240,255,0.15)]">
+<div class="flex justify-around items-center h-20 px-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-primary-container drop-shadow-[0_0_10px_rgba(0,240,255,0.4)] hover:bg-surface-variant/20 rounded-xl w-16 h-16 transition-all duration-300 scale-110" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="grid_view" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl w-16 h-16 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="forum">forum</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl w-16 h-16 transition-all duration-300" href="#">
+<div class="bg-primary-container/10 rounded-full p-2 mb-1 border border-primary-container/30">
+<span class="material-symbols-outlined text-primary-container" data-icon="add_circle">add_circle</span>
+</div>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl w-16 h-16 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Pockets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl w-16 h-16 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Profil</span>
+</a>
+</div>
+</nav>
+</body></html>

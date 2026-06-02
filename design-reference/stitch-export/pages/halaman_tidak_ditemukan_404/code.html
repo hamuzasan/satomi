@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>404 - Halaman tidak ditemukan | SATOMI</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#353439",
+                        "inverse-on-surface": "#303034",
+                        "surface-container-high": "#2a292e",
+                        "on-secondary-container": "#480063",
+                        "on-surface": "#e5e1e7",
+                        "on-primary-fixed-variant": "#004f54",
+                        "tertiary-fixed-dim": "#cac1ed",
+                        "on-tertiary-fixed": "#1d1639",
+                        "on-background": "#e5e1e7",
+                        "on-surface-variant": "#b9cacb",
+                        "on-primary-fixed": "#002022",
+                        "on-primary-container": "#006970",
+                        "outline-variant": "#3b494b",
+                        "surface": "#131317",
+                        "surface-container-low": "#1b1b1f",
+                        "primary": "#dbfcff",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#006970",
+                        "background": "#131317",
+                        "primary-fixed": "#7df4ff",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-tertiary-fixed-variant": "#484267",
+                        "on-secondary-fixed": "#320047",
+                        "surface-container-lowest": "#0e0e12",
+                        "secondary": "#ecb2ff",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "error-container": "#93000a",
+                        "on-primary": "#00363a",
+                        "inverse-surface": "#e5e1e7",
+                        "surface-dim": "#131317",
+                        "on-tertiary": "#322b4f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1f1f23",
+                        "outline": "#849495",
+                        "tertiary": "#faf4ff",
+                        "on-tertiary-container": "#615a81",
+                        "surface-tint": "#00dbe9",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "surface-bright": "#39393d",
+                        "primary-container": "#00f0ff",
+                        "on-secondary": "#520071",
+                        "surface-container-highest": "#353439",
+                        "secondary-container": "#cf5cff",
+                        "tertiary-container": "#ddd4ff",
+                        "secondary-fixed": "#f8d8ff",
+                        "tertiary-fixed": "#e6deff",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        @keyframes subtle-float {
+            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
+            50% { transform: translateY(-10px) scale(1.02); filter: brightness(1.2); }
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
+            20% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+            40% { clip-path: inset(40% 0 40% 0); transform: translate(2px, 2px); }
+            60% { clip-path: inset(15% 0 60% 0); transform: translate(-2px, -2px); }
+            80% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 2px); }
+            100% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, -2px); }
+        }
+        
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+
+        .animate-float {
+            animation: subtle-float 6s ease-in-out infinite;
+        }
+        
+        .shimmer-effect {
+            animation: shimmer 2.5s infinite;
+        }
+
+        .glitch-text::before, .glitch-text::after {
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 rgba(207, 92, 255, 0.7); /* secondary-container */
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+            z-index: -1;
+        }
+        
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: 2px 0 rgba(0, 240, 255, 0.7); /* primary-container */
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+            z-index: -2;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary selection:text-on-primary min-h-screen flex flex-col font-sans overflow-x-hidden">
+<!-- Ambient Glowing Layers (Glassmorphism/Retro-Futurism background elements) -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
+<div class="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-primary-container rounded-full blur-[100px] opacity-10 mix-blend-screen transform -translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] max-w-[400px] max-h-[400px] bg-secondary-container rounded-full blur-[100px] opacity-10 mix-blend-screen transform translate-x-1/2 translate-y-1/2"></div>
+</div>
+<!-- Subtle Cyberpunk Scanlines -->
+<div class="fixed inset-0 pointer-events-none bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.2)_51%)] bg-[length:100%_4px] opacity-30 z-50"></div>
+<!-- Main Content Canvas (Navigation Shell Suppressed for Dead-End/Error Context) -->
+<main class="flex-grow flex items-center justify-center relative z-10 p-margin-mobile md:p-margin-desktop w-full max-w-container-max mx-auto">
+<div class="flex flex-col items-center text-center max-w-2xl">
+<!-- Visual Element: Glowing Broken Orb -->
+<div class="relative w-64 h-64 md:w-[400px] md:h-[400px] mb-8 md:mb-12 animate-float">
+<!-- Inner glow for depth -->
+<div class="absolute inset-4 rounded-full shadow-[0_0_80px_rgba(125,244,255,0.4)] pointer-events-none z-0"></div>
+<img alt="Satomi System Core Error" class="w-full h-full object-cover rounded-full mix-blend-screen opacity-90 relative z-10 border border-white/5 backdrop-blur-xl" data-alt="A hyper-detailed, glowing high-tech digital orb representing an advanced AI core, exhibiting subtle glitching and fragmentation effects to imply a system error. The orb hovers over a dark, shattered grid pathway of light, set against a deep obsidian black void. The lighting relies on intense, luminous cyan and deep magenta neon glows with long-exposure light trails and frosted glassmorphism textures. The overall aesthetic is cyber-premium, ultra-modern, and technically sophisticated, perfectly fitting a dark-mode high-end fintech application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOM9hvU5oMBHRvpqi6UbMrEp9_P5uXfXLl1yy1Gl5_sH7i5HNo6zoxjhycV2zvoJRx-C5ju9ioP_nSBbJAaPiSVNfaClp0B8Mul3xU3CarLhz1VEf5aGSvTU_fvDa0GYBpvuUIvHTjMtC-XJvYgLKvjsdAvuEVi7u-ahNPMNNMkyP1s28xdF2KCSeVHdldBN0dJw3tgnXEKmRZuZI6crgmCcZSzRRWQGuiwCrehb-PM1dyTIcIZ8KGunRWfbVsa_3N2hlr5vvyzNc"/>
+<!-- Fragment/Glitch Overlays (CSS built) -->
+<div class="absolute top-1/4 right-1/4 w-12 h-2 bg-primary-fixed blur-[2px] opacity-60 transform rotate-45 z-20"></div>
+<div class="absolute bottom-1/3 left-1/4 w-8 h-1 bg-secondary-fixed blur-[1px] opacity-80 transform -rotate-12 z-20"></div>
+</div>
+<!-- Typography & Message -->
+<div class="flex flex-col items-center space-y-4 md:space-y-6">
+<!-- Glitched 404 Header -->
+<h1 class="relative font-display-lg text-[100px] md:text-[160px] leading-none text-transparent bg-clip-text bg-gradient-to-b from-primary-fixed to-surface-variant drop-shadow-[0_0_30px_rgba(125,244,255,0.3)] tracking-tighter glitch-text select-none">
+                    404
+                </h1>
+<!-- Main Title -->
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+                    Halaman tidak ditemukan
+                </h2>
+<!-- Supporting Text -->
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+                    Sepertinya kamu tersesat dari jalur keuangan.
+                </p>
+</div>
+<!-- Primary Action -->
+<div class="mt-10 md:mt-12">
+<a class="group relative inline-flex items-center justify-center font-label-sm text-label-sm text-on-primary-fixed bg-primary-fixed px-8 py-4 rounded-full uppercase tracking-[0.1em] hover:shadow-[0_0_40px_rgba(125,244,255,0.5)] hover:bg-primary-fixed-dim hover:scale-105 transition-all duration-300 overflow-hidden backdrop-blur-md border border-transparent hover:border-white/20" href="#">
+<span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full shimmer-effect pointer-events-none"></span>
+<span class="relative flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                        Kembali ke Dashboard
+                    </span>
+</a>
+</div>
+</div>
+</main>
+</body></html>

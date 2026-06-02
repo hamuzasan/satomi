@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SATOMI - Reset Password</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#320047",
+                      "on-tertiary": "#322b4f",
+                      "inverse-primary": "#006970",
+                      "surface": "#131317",
+                      "primary": "#dbfcff",
+                      "outline": "#849495",
+                      "on-tertiary-fixed-variant": "#484267",
+                      "background": "#131317",
+                      "on-primary": "#00363a",
+                      "secondary-fixed-dim": "#ecb2ff",
+                      "primary-container": "#00f0ff",
+                      "on-surface-variant": "#b9cacb",
+                      "primary-fixed": "#7df4ff",
+                      "tertiary": "#faf4ff",
+                      "on-primary-fixed-variant": "#004f54",
+                      "on-secondary-container": "#480063",
+                      "outline-variant": "#3b494b",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-container": "#615a81",
+                      "surface-container-highest": "#353439",
+                      "on-secondary-fixed-variant": "#74009f",
+                      "surface-container-lowest": "#0e0e12",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed-dim": "#cac1ed",
+                      "inverse-surface": "#e5e1e7",
+                      "secondary-fixed": "#f8d8ff",
+                      "secondary-container": "#cf5cff",
+                      "surface-variant": "#353439",
+                      "primary-fixed-dim": "#00dbe9",
+                      "on-primary-fixed": "#002022",
+                      "on-error": "#690005",
+                      "surface-dim": "#131317",
+                      "surface-bright": "#39393d",
+                      "surface-container-high": "#2a292e",
+                      "on-tertiary-fixed": "#1d1639",
+                      "tertiary-container": "#ddd4ff",
+                      "on-primary-container": "#006970",
+                      "inverse-on-surface": "#303034",
+                      "error-container": "#93000a",
+                      "on-surface": "#e5e1e7",
+                      "surface-tint": "#00dbe9",
+                      "surface-container": "#1f1f23",
+                      "on-secondary": "#520071",
+                      "surface-container-low": "#1b1b1f",
+                      "secondary": "#ecb2ff",
+                      "on-background": "#e5e1e7",
+                      "tertiary-fixed": "#e6deff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "margin-desktop": "64px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "64px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-lg": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #050508;
+            color: #e5e1e7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .glass-card {
+            background: rgba(19, 19, 23, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: auto;
+            bottom: auto;
+            width: 30%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0, 219, 233, 0.8), transparent);
+            border-top-left-radius: 0.75rem;
+        }
+
+        .glow-primary {
+            box-shadow: 0 0 30px rgba(0, 219, 233, 0.2);
+        }
+
+        .glow-active {
+            box-shadow: 0 0 40px rgba(0, 219, 233, 0.4);
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 48px 48px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-light {
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60vw;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(0, 219, 233, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Input styling overrides */
+        input:focus {
+            outline: none;
+            border-color: #00dbe9;
+            box-shadow: inset 0 0 10px rgba(0, 219, 233, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md antialiased">
+<div class="bg-grid"></div>
+<div class="ambient-light"></div>
+<main class="flex-1 flex flex-col justify-center items-center p-margin-mobile md:p-margin-desktop w-full max-w-container-max mx-auto relative z-10">
+<!-- Brand / Header -->
+<div class="mb-12 text-center">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg tracking-tighter text-primary drop-shadow-[0_0_8px_rgba(0,219,233,0.4)]">SATOMI</h1>
+</div>
+<!-- Form Container -->
+<div class="glass-card rounded-xl p-8 md:p-12 w-full max-w-md glow-primary transition-all duration-500" id="reset-form-container">
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Reset password</h2>
+<p class="text-on-surface-variant">Masukkan email kamu, kami akan kirim link reset.</p>
+</div>
+<form class="space-y-6" id="reset-form" onsubmit="event.preventDefault(); showSuccessState();">
+<div class="space-y-2 relative">
+<label class="font-label-sm text-label-sm text-primary uppercase block" for="email">Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant">mail</span>
+<input class="w-full bg-black/30 border border-white/10 rounded-lg py-3 pl-12 pr-4 text-on-surface placeholder:text-outline-variant transition-all duration-300" id="email" placeholder="nama@email.com" required="" type="email"/>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 px-6 rounded-lg font-label-sm text-label-sm uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,219,233,0.6)] transition-all duration-300 active:scale-95 flex items-center justify-center gap-2" type="submit">
+<span>Kirim Link Reset</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 text-center">
+<a class="font-label-sm text-label-sm text-primary uppercase hover:text-primary-fixed transition-colors inline-flex items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-[16px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    Kembali ke Login
+                </a>
+</div>
+</div>
+<!-- Success State Container (Hidden by default) -->
+<div class="glass-card rounded-xl p-8 md:p-12 w-full max-w-md glow-active text-center hidden opacity-0 transition-all duration-500 scale-95" id="success-container">
+<div class="w-20 h-20 mx-auto bg-primary-container/20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(0,219,233,0.3)]">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-4">Email terkirim</h2>
+<p class="text-on-surface-variant mb-8">Cek inbox atau folder spam untuk melanjutkan reset password.</p>
+<button class="w-full bg-transparent border-2 border-primary/50 text-on-surface py-3 px-6 rounded-lg font-label-sm text-label-sm uppercase tracking-wider hover:border-primary hover:bg-primary/10 transition-all duration-300" onclick="resetForm()">
+                Kembali
+            </button>
+</div>
+</main>
+<script>
+        function showSuccessState() {
+            const formContainer = document.getElementById('reset-form-container');
+            const successContainer = document.getElementById('success-container');
+            
+            // Fade out form
+            formContainer.style.opacity = '0';
+            formContainer.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                formContainer.classList.add('hidden');
+                
+                // Show success state
+                successContainer.classList.remove('hidden');
+                // Trigger reflow
+                void successContainer.offsetWidth;
+                
+                successContainer.style.opacity = '1';
+                successContainer.style.transform = 'scale(1)';
+            }, 500);
+        }
+
+        function resetForm() {
+            const formContainer = document.getElementById('reset-form-container');
+            const successContainer = document.getElementById('success-container');
+            const form = document.getElementById('reset-form');
+            
+            // Fade out success
+            successContainer.style.opacity = '0';
+            successContainer.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                successContainer.classList.add('hidden');
+                
+                // Reset and show form
+                form.reset();
+                formContainer.classList.remove('hidden');
+                // Trigger reflow
+                void formContainer.offsetWidth;
+                
+                formContainer.style.opacity = '1';
+                formContainer.style.transform = 'scale(1)';
+            }, 500);
+        }
+    </script>
+</body></html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SATOMI - Pengaturan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#353439",
+                    "inverse-on-surface": "#303034",
+                    "surface-container-high": "#2a292e",
+                    "on-secondary-container": "#480063",
+                    "on-surface": "#e5e1e7",
+                    "on-primary-fixed-variant": "#004f54",
+                    "tertiary-fixed-dim": "#cac1ed",
+                    "on-tertiary-fixed": "#1d1639",
+                    "on-background": "#e5e1e7",
+                    "on-surface-variant": "#b9cacb",
+                    "on-primary-fixed": "#002022",
+                    "on-primary-container": "#006970",
+                    "outline-variant": "#3b494b",
+                    "surface": "#131317",
+                    "surface-container-low": "#1b1b1f",
+                    "primary": "#dbfcff",
+                    "error": "#ffb4ab",
+                    "inverse-primary": "#006970",
+                    "background": "#131317",
+                    "primary-fixed": "#7df4ff",
+                    "primary-fixed-dim": "#00dbe9",
+                    "on-tertiary-fixed-variant": "#484267",
+                    "on-secondary-fixed": "#320047",
+                    "surface-container-lowest": "#0e0e12",
+                    "secondary": "#ecb2ff",
+                    "on-secondary-fixed-variant": "#74009f",
+                    "error-container": "#93000a",
+                    "on-primary": "#00363a",
+                    "inverse-surface": "#e5e1e7",
+                    "surface-dim": "#131317",
+                    "on-tertiary": "#322b4f",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1f1f23",
+                    "outline": "#849495",
+                    "tertiary": "#faf4ff",
+                    "on-tertiary-container": "#615a81",
+                    "surface-tint": "#00dbe9",
+                    "secondary-fixed-dim": "#ecb2ff",
+                    "surface-bright": "#39393d",
+                    "primary-container": "#00f0ff",
+                    "on-secondary": "#520071",
+                    "surface-container-highest": "#353439",
+                    "secondary-container": "#cf5cff",
+                    "tertiary-container": "#ddd4ff",
+                    "secondary-fixed": "#f8d8ff",
+                    "tertiary-fixed": "#e6deff",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "unit": "4px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-sm": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-lg-mobile": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-md": [
+                            "Manrope"
+                    ],
+                    "headline-lg": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "display-lg": [
+                            "64px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.0",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "40px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Cyber-Premium Glows & Glassmorphism */
+        .glass-card {
+            background-color: rgba(31, 31, 35, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.8), transparent);
+        }
+
+        .neon-glow-primary {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+        }
+
+        .cyber-button-ghost {
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .cyber-button-ghost:hover {
+            border-color: rgba(236, 178, 255, 0.5);
+            box-shadow: 0 0 15px rgba(236, 178, 255, 0.2);
+            text-shadow: 0 0 8px rgba(236, 178, 255, 0.5);
+        }
+
+        .luminous-text {
+            text-shadow: 0 0 10px rgba(0, 219, 233, 0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-white/10 shadow-none flex justify-between items-center w-full px-margin-mobile py-4 hidden md:flex">
+<div class="flex items-center gap-4 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="menu">menu</span>
+<h1 class="font-display-lg text-headline-lg-mobile font-extrabold tracking-tighter text-primary dark:text-primary-fixed drop-shadow-[0_0_10px_rgba(0,219,233,0.5)]">SATOMI</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors duration-300 uppercase" href="#">Dashboard</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors duration-300 uppercase" href="#">Chat</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary-fixed transition-colors duration-300 uppercase" href="#">Pockets</a>
+<a class="font-label-sm text-label-sm text-primary flex-col hover:text-primary-fixed transition-colors duration-300 uppercase" href="#">Profile</a>
+</nav>
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer active:scale-95 transition-transform" data-icon="notifications">notifications</span>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12 pb-32">
+<!-- Page Header -->
+<div class="mb-10 flex flex-col gap-2">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary luminous-text tracking-tight">Pengaturan</h2>
+<p class="text-on-surface-variant">Kelola preferensi dan profil identitas finansial Anda.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Profile Overview Card (Spans 4 cols on desktop) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="glass-card rounded-xl p-6 flex flex-col items-center text-center neon-glow-primary">
+<div class="w-24 h-24 rounded-full mb-4 relative p-1 bg-gradient-to-tr from-primary to-secondary">
+<img alt="Hamzah Profile Picture" class="w-full h-full rounded-full object-cover border-2 border-background" data-alt="A highly detailed, ultra-realistic portrait of a young professional male in a cyberpunk aesthetic. He is illuminated by striking cyan and magenta neon lights against an obsidian dark background. The lighting is cinematic, creating deep shadows and glowing highlights on his face. The mood is serious, intelligent, and hyper-modern. The image conveys a sense of powerful intelligence fitting a high-end AI Fintech experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd8qUiNl3r6hQ4mjGk2wmPaLD7ftww7FCPMt6y-VAnWMZHhdR4bKBQ47XmPhj0fj03T2ZQTpGUpVjkDuc8xcKLBKOmpGfbfAqDV2Jo-DCmkLIy1NwkAdbnKmfqGd_gPHaaysH9bGeReriAZAiiEAoRYJhFzxOoSF28nnimjgZJ7fIxUaiLP9S_HfsKuBKuOFaBMvds6IHuJmrUuCUB2J-zIOEqJqpJV7eTEeMB74TaElbiEuExAkBckvn-DZoeyufuM_g9PV--HDw"/>
+<div class="absolute bottom-0 right-0 w-6 h-6 bg-surface-tint rounded-full border-2 border-background flex items-center justify-center shadow-[0_0_10px_rgba(0,219,233,0.8)]">
+<span class="material-symbols-outlined text-[14px] text-on-primary" data-icon="verified">verified</span>
+</div>
+</div>
+<h3 class="font-headline-lg-mobile text-[24px] text-on-surface font-bold">Hamzah</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1 tracking-wider">Premium Member</p>
+<div class="w-full h-[1px] bg-white/10 my-6"></div>
+<button class="w-full py-3 rounded-lg border border-primary/30 text-primary font-label-sm text-label-sm uppercase tracking-wider hover:bg-primary/10 transition-colors cyber-button-ghost">
+                        Edit Profil
+                    </button>
+</div>
+</div>
+<!-- Settings Categories (Spans 8 cols on desktop) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- AI Persona Section -->
+<section>
+<h4 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 ml-2">Asisten AI</h4>
+<div class="glass-card rounded-xl p-2">
+<a class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(207,92,255,0.3)] transition-shadow">
+<span class="material-symbols-outlined text-secondary" data-icon="smart_toy">smart_toy</span>
+</div>
+<div>
+<h5 class="text-on-surface font-medium">AI Persona</h5>
+<p class="text-sm text-on-surface-variant mt-0.5">Sesuaikan gaya komunikasi SATOMI</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Preferences Section -->
+<section>
+<h4 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 ml-2 mt-2">Preferensi</h4>
+<div class="glass-card rounded-xl p-2 flex flex-col gap-1">
+<a class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-shadow">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="account_balance">account_balance</span>
+</div>
+<div>
+<h5 class="text-on-surface font-medium">Preferensi Keuangan</h5>
+<p class="text-sm text-on-surface-variant mt-0.5">Mata uang dasar, target investasi</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+<div class="h-[1px] w-full bg-white/5 mx-auto w-[95%]"></div>
+<a class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-shadow">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="notifications_active">notifications_active</span>
+</div>
+<div>
+<h5 class="text-on-surface font-medium">Notifikasi</h5>
+<p class="text-sm text-on-surface-variant mt-0.5">Peringatan pasar &amp; aktivitas akun</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Security Section -->
+<section>
+<h4 class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-4 ml-2 mt-2">Keamanan &amp; Data</h4>
+<div class="glass-card rounded-xl p-2 flex flex-col gap-1">
+<a class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-shadow">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="shield_lock">shield_lock</span>
+</div>
+<div>
+<h5 class="text-on-surface font-medium">Keamanan</h5>
+<p class="text-sm text-on-surface-variant mt-0.5">Password, PIN, &amp; Biometrik</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+<div class="h-[1px] w-full bg-white/5 mx-auto w-[95%]"></div>
+<a class="flex items-center justify-between p-4 rounded-lg hover:bg-white/5 transition-colors group cursor-pointer" href="#">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(0,240,255,0.2)] transition-shadow">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="policy">policy</span>
+</div>
+<div>
+<h5 class="text-on-surface font-medium">Privasi &amp; Data</h5>
+<p class="text-sm text-on-surface-variant mt-0.5">Pengelolaan data personal Anda</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Logout -->
+<button class="mt-6 glass-card rounded-xl p-4 flex items-center justify-center gap-3 text-error hover:bg-error/10 transition-colors border-error/20">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Keluar Akun</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container/60 dark:bg-surface-container/60 backdrop-blur-xl fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] rounded-full border border-white/10 shadow-[0_0_20px_rgba(0,0,0,0.5)] z-50 flex justify-around items-center px-6 py-3 mx-auto max-w-md md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-secondary-fixed transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1 uppercase text-[10px]">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-secondary-fixed transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-label-sm text-label-sm mt-1 uppercase text-[10px]">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/60 hover:text-secondary-fixed transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1 uppercase text-[10px]">Pockets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed drop-shadow-[0_0_8px_rgba(0,219,233,0.6)] hover:text-secondary-fixed transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person" data-weight="fill">person</span>
+<span class="font-label-sm text-label-sm mt-1 uppercase text-[10px]">Profile</span>
+</a>
+</nav>
+</body></html>

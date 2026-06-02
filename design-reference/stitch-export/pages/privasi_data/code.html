@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Privasi &amp; Data - SATOMI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#353439",
+                        "inverse-on-surface": "#303034",
+                        "surface-container-high": "#2a292e",
+                        "on-secondary-container": "#480063",
+                        "on-surface": "#e5e1e7",
+                        "on-primary-fixed-variant": "#004f54",
+                        "tertiary-fixed-dim": "#cac1ed",
+                        "on-tertiary-fixed": "#1d1639",
+                        "on-background": "#e5e1e7",
+                        "on-surface-variant": "#b9cacb",
+                        "on-primary-fixed": "#002022",
+                        "on-primary-container": "#006970",
+                        "outline-variant": "#3b494b",
+                        "surface": "#131317",
+                        "surface-container-low": "#1b1b1f",
+                        "primary": "#dbfcff",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#006970",
+                        "background": "#131317",
+                        "primary-fixed": "#7df4ff",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-tertiary-fixed-variant": "#484267",
+                        "on-secondary-fixed": "#320047",
+                        "surface-container-lowest": "#0e0e12",
+                        "secondary": "#ecb2ff",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "error-container": "#93000a",
+                        "on-primary": "#00363a",
+                        "inverse-surface": "#e5e1e7",
+                        "surface-dim": "#131317",
+                        "on-tertiary": "#322b4f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#1f1f23",
+                        "outline": "#849495",
+                        "tertiary": "#faf4ff",
+                        "on-tertiary-container": "#615a81",
+                        "surface-tint": "#00dbe9",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "surface-bright": "#39393d",
+                        "primary-container": "#00f0ff",
+                        "on-secondary": "#520071",
+                        "surface-container-highest": "#353439",
+                        "secondary-container": "#cf5cff",
+                        "tertiary-container": "#ddd4ff",
+                        "secondary-fixed": "#f8d8ff",
+                        "tertiary-fixed": "#e6deff",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050508; /* Obsidian base */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 219, 233, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(236, 178, 255, 0.03) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: theme('colors.on-background');
+        }
+        
+        .glass-panel {
+            background-color: theme('colors.surface-container/40');
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-panel-danger {
+            background-color: rgba(147, 0, 10, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 180, 171, 0.2);
+        }
+
+        .neon-glow-primary {
+            box-shadow: 0 0 20px rgba(0, 219, 233, 0.2);
+        }
+        
+        .neon-glow-danger {
+            box-shadow: 0 0 30px rgba(255, 180, 171, 0.15);
+        }
+
+        /* Toggle Switch Styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.primary-container');
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: white;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-white/10 shadow-none flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4">
+<div class="flex items-center gap-4 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="arrow_back">arrow_back</span>
+</div>
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg font-extrabold tracking-tighter text-primary dark:text-primary-fixed drop-shadow-[0_0_10px_rgba(0,219,233,0.5)]">
+            SATOMI
+        </div>
+<div class="flex items-center gap-4 cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-colors duration-300" data-icon="shield">shield</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12 mb-24 md:mb-0">
+<!-- Header -->
+<div class="mb-10 text-center md:text-left">
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Privasi &amp; Data</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Kelola bagaimana data Anda disimpan, digunakan oleh AI kami, dan kontrol penuh atas privasi akun Anda.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Data Transaksi Card -->
+<div class="md:col-span-8 glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-32 h-1 bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex items-start gap-4 mb-6">
+<div class="p-3 rounded-lg bg-surface-container-high border border-outline-variant/30 flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="database">database</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface">Data Transaksi</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Unduh salinan transaksi Anda atau hapus riwayat tertentu.</p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 mt-8">
+<button class="flex-1 bg-primary text-on-primary font-label-sm text-label-sm uppercase py-3 px-6 rounded-lg font-bold hover:neon-glow-primary transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                        Export CSV
+                    </button>
+<button class="flex-1 bg-transparent border-2 border-outline-variant text-on-surface font-label-sm text-label-sm uppercase py-3 px-6 rounded-lg font-bold hover:border-primary/50 transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="manage_search">manage_search</span>
+                        Kelola Arsip
+                    </button>
+</div>
+</div>
+<!-- Transparansi Data Card -->
+<div class="md:col-span-4 glass-panel rounded-xl p-6 relative overflow-hidden group flex flex-col justify-between">
+<div class="absolute top-0 left-0 w-16 h-1 bg-gradient-to-r from-secondary to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="policy">policy</span>
+<h3 class="font-headline-lg text-body-md font-bold text-on-surface">Transparansi Data</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Lihat laporan lengkap tentang bagaimana SATOMI melindungi enkripsi end-to-end Anda.</p>
+</div>
+<button class="mt-6 text-primary font-label-sm text-label-sm uppercase flex items-center gap-2 group-hover:text-primary-fixed transition-colors">
+                    Baca Laporan <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- AI Processing Toggle Card -->
+<div class="md:col-span-6 glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-md bg-surface-container-high border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary" data-icon="psychology">psychology</span>
+</div>
+<h3 class="font-headline-lg text-body-md font-bold text-on-surface">Pemrosesan AI</h3>
+</div>
+<!-- Toggle Switch -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-on-primary border-4 border-surface-container appearance-none cursor-pointer z-10 checked:bg-on-primary-container" id="ai_toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer" for="ai_toggle"></label>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-2">Izinkan data anonim digunakan untuk meningkatkan akurasi wawasan finansial AI.</p>
+<div class="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span>
+<span class="font-label-sm text-[10px] uppercase tracking-wider">Aktif (Disarankan)</span>
+</div>
+</div>
+<!-- Chat History Toggle Card -->
+<div class="md:col-span-6 glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-md bg-surface-container-high border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary" data-icon="history">history</span>
+</div>
+<h3 class="font-headline-lg text-body-md font-bold text-on-surface">Riwayat Chat AI</h3>
+</div>
+<!-- Toggle Switch -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-on-primary border-4 border-surface-container appearance-none cursor-pointer z-10 checked:bg-on-primary-container" id="chat_toggle" name="toggle2" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer" for="chat_toggle"></label>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-2">Simpan riwayat percakapan dengan asisten SATOMI untuk konteks yang lebih baik di masa depan.</p>
+<div class="mt-4 flex gap-2">
+<button class="text-on-surface-variant hover:text-error font-label-sm text-label-sm uppercase transition-colors duration-200 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="delete_sweep">delete_sweep</span> Bersihkan Riwayat
+                     </button>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="md:col-span-12 mt-8">
+<div class="flex items-center gap-4 mb-4">
+<div class="h-px bg-outline-variant flex-grow"></div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-error">Danger Zone</span>
+<div class="h-px bg-outline-variant flex-grow"></div>
+</div>
+<div class="glass-panel-danger rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 hover:neon-glow-danger transition-shadow duration-500">
+<div>
+<h3 class="font-headline-lg text-headline-lg-mobile text-error mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                            Hapus Semua Data
+                        </h3>
+<p class="font-body-md text-body-md text-on-error-container/80 max-w-xl">
+                            Tindakan ini tidak dapat dibatalkan. Ini akan menghapus akun Anda secara permanen, beserta seluruh riwayat transaksi, pengaturan, dan data personalisasi AI.
+                        </p>
+</div>
+<button class="flex-shrink-0 bg-error/10 border border-error/50 text-error hover:bg-error hover:text-on-error font-label-sm text-label-sm uppercase py-4 px-8 rounded-lg font-bold transition-all duration-300 w-full md:w-auto text-center">
+                        Hapus Akun Permanen
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Navigation Suppressed logic applied: This is a sub-page (Settings/Privacy) with a 'Back' action, implying a temporary departure from the main flow. BottomNavBar and FAB are intentionally omitted. -->
+<script>
+        // Simple script to handle toggle visual states if needed beyond CSS
+        document.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                // Future API calls or state management would go here
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,19 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="satomi-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Circular glowing orb -->
+  <circle cx="50" cy="50" r="35" fill="url(#satomi-grad)" fill-opacity="0.2" stroke="url(#satomi-grad)" stroke-width="2" filter="url(#glow)" />
+  <circle cx="50" cy="50" r="25" fill="url(#satomi-grad)" fill-opacity="0.8" />
+  <!-- Sparkle/AI icon inside -->
+  <path d="M50 35L53 47L65 50L53 53L50 65L47 53L35 50L47 47L50 35Z" fill="white" />
+  <!-- Emerald accent sparkle -->
+  <circle cx="68" cy="32" r="4" fill="#079969" filter="url(#glow)" />
+</svg>

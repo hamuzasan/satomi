@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SATOMI - Tujuan Finansial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#303034",
+                        "surface-tint": "#00dbe9",
+                        "on-tertiary": "#322b4f",
+                        "on-surface": "#e5e1e7",
+                        "surface-dim": "#131317",
+                        "outline-variant": "#3b494b",
+                        "surface-container-low": "#1b1b1f",
+                        "inverse-primary": "#006970",
+                        "on-secondary": "#520071",
+                        "on-primary-fixed-variant": "#004f54",
+                        "tertiary": "#faf4ff",
+                        "surface-container-high": "#2a292e",
+                        "tertiary-fixed-dim": "#cac1ed",
+                        "on-surface-variant": "#b9cacb",
+                        "on-secondary-container": "#480063",
+                        "secondary-fixed": "#f8d8ff",
+                        "on-tertiary-container": "#615a81",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#484267",
+                        "on-secondary-fixed": "#320047",
+                        "on-background": "#e5e1e7",
+                        "primary-container": "#00f0ff",
+                        "error": "#ffb4ab",
+                        "on-primary": "#00363a",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "primary": "#dbfcff",
+                        "tertiary-container": "#ddd4ff",
+                        "on-primary-container": "#006970",
+                        "tertiary-fixed": "#e6deff",
+                        "surface-container-lowest": "#0e0e12",
+                        "on-tertiary-fixed": "#1d1639",
+                        "inverse-surface": "#e5e1e7",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "secondary-container": "#cf5cff",
+                        "surface-bright": "#39393d",
+                        "outline": "#849495",
+                        "surface": "#131317",
+                        "on-primary-fixed": "#002022",
+                        "primary-fixed": "#7df4ff",
+                        "surface-container-highest": "#353439",
+                        "surface-variant": "#353439",
+                        "secondary": "#ecb2ff",
+                        "surface-container": "#1f1f23",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "background": "#131317"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #050508; } /* Base obsidian */
+        .glass-panel {
+            background: rgba(19, 19, 23, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.15);
+        }
+        .text-glow {
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+        }
+        .progress-ring {
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#050508] text-on-background font-body-md antialiased min-h-screen pb-24 md:pb-0 md:pl-72 selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar Mobile -->
+<header class="md:hidden bg-surface/60 backdrop-blur-xl dark:bg-surface/60 fixed top-0 w-full z-50 border-b border-outline-variant/20 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center px-6 h-16 w-full">
+<span class="material-symbols-outlined text-primary-container dark:text-primary-container">language</span>
+<h1 class="font-display-lg text-headline-lg-mobile tracking-tighter text-primary-container drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">SATOMI</h1>
+<span class="material-symbols-outlined text-primary-container dark:text-primary-container hover:text-primary transition-colors duration-300 active:scale-95 transition-transform">notifications</span>
+</div>
+</header>
+<!-- SideNav Desktop -->
+<nav class="hidden md:flex flex-col h-full py-8 bg-surface-container-lowest/90 backdrop-blur-2xl dark:bg-surface-container-lowest/90 h-full w-72 rounded-r-[32px] border-r border-outline-variant/20 shadow-2xl fixed left-0 top-0 z-50">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/30 flex items-center justify-center overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo74cOvKyZ04-6XYYmVf8-0mhUj0FEd5goiaIyIty_hz6NwqU9NoiyQvHqu0bYyLaZkUuriAeeJMRRs7EShZ21a0nQ78w9dwrm5lheYPyINuhl06BHiGEuiAlK5TYwrvtYBgNiZ-Rjl1itpuUQwxe7nf6ApqAtdJvqT5YZ3mZ3e8zgSoIwjyTlyOUbhQucOued8cX2CEGA0vS2knCpwpYDIuzU9T0b16sAMdWWL2dVliujIkPjlWkkG4PHt_55B_8thaGF3frNyIo"/>
+</div>
+<div>
+<h2 class="font-display-lg text-headline-lg text-primary-container text-xl">SATOMI AI</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Institutional Mode</p>
+<p class="font-label-sm text-label-sm text-outline text-[10px]">v2.0.4</p>
+</div>
+</div>
+<ul class="flex-1 space-y-2 mt-4 font-body-md text-body-md">
+<li><a class="flex items-center gap-3 text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined">grid_view</span> Dashboard</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined">forum</span> Chat</a></li>
+<li><a class="flex items-center gap-3 bg-secondary-container/20 text-secondary-fixed border-l-4 border-secondary-fixed py-3 px-6 transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span> Pockets</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined">history</span> Riwayat</a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant py-3 px-6 hover:bg-surface-variant/10 hover:text-on-surface transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined">person</span> Profil</a></li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-24 md:pt-16 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12">
+<div>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight mb-2">Tujuan Finansial</h1>
+<p class="text-on-surface-variant text-body-md">Lacak dan kelola progres pencapaian mimpi Anda.</p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button class="bg-transparent border-2 border-outline-variant text-on-surface px-6 py-3 rounded-full hover:border-primary-container hover:text-primary-container transition-all flex items-center gap-2 group">
+<span class="material-symbols-outlined group-hover:rotate-180 transition-transform">add</span>
+                    Tambah Goal
+                </button>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-bold hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-shadow flex items-center gap-2">
+<span class="material-symbols-outlined">auto_awesome</span>
+                    Minta Strategi Satomi
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Goal Utama: Large Summary Card (Col 1-8) -->
+<div class="md:col-span-8 glass-panel rounded-[32px] p-8 relative overflow-hidden group">
+<!-- Decorative glow and lines -->
+<div class="absolute -top-32 -right-32 w-96 h-96 bg-primary-container/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute top-0 left-0 w-32 h-[1px] bg-gradient-to-r from-primary-container to-transparent"></div>
+<div class="absolute top-0 left-0 w-[1px] h-32 bg-gradient-to-b from-primary-container to-transparent"></div>
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="bg-primary-container/20 text-primary-container p-2 rounded-xl">
+<span class="material-symbols-outlined">flight_takeoff</span>
+</span>
+<div>
+<h2 class="text-on-surface font-bold text-xl">Dana Jepang</h2>
+<p class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span> Dec 2024
+                            </p>
+</div>
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-4 py-1.5 rounded-full font-label-sm text-label-sm uppercase border border-outline-variant/30">Goal Utama</span>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+<!-- Progress Ring -->
+<div class="relative w-48 h-48 flex-shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background circle -->
+<circle class="text-surface-container-high" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="8"></circle>
+<!-- Progress circle (65%) -->
+<circle class="progress-ring drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]" cx="50" cy="50" fill="none" r="45" stroke="url(#cyan-gradient)" stroke-dasharray="283" stroke-dashoffset="99" stroke-linecap="round" stroke-width="8"></circle>
+<defs>
+<lineargradient id="cyan-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#00f0ff"></stop>
+<stop offset="100%" stop-color="#7df4ff"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-lg text-headline-lg-mobile text-primary-container text-glow">65%</span>
+<span class="text-on-surface-variant text-xs">Terkumpul</span>
+</div>
+</div>
+<!-- Details -->
+<div class="flex-1 w-full space-y-6">
+<div>
+<p class="text-on-surface-variant text-sm mb-1">Terkumpul</p>
+<p class="text-3xl font-bold text-on-surface">Rp 13.000.000</p>
+<div class="h-1 w-full bg-surface-container-high mt-4 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary-container to-secondary-container w-[65%] rounded-full shadow-[0_0_10px_rgba(0,240,255,0.5)]"></div>
+</div>
+<div class="flex justify-between text-xs text-on-surface-variant mt-2">
+<span>Rp 0</span>
+<span>Target: Rp 20.000.000</span>
+</div>
+</div>
+<!-- AI Insight Box -->
+<div class="bg-surface-container-low/50 border border-outline-variant/20 rounded-2xl p-4 flex gap-4">
+<span class="material-symbols-outlined text-secondary-fixed mt-1">neurology</span>
+<div>
+<p class="text-sm text-on-surface"><strong class="text-secondary-fixed">Satomi Insight:</strong> Anda on-track! Sisihkan <span class="text-primary-container font-bold">Rp 75.000/hari</span> untuk mencapai target sebulan lebih cepat dari deadline.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Other Goals (Col 9-12 or wrapped) -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Secondary Goal Card 1 -->
+<div class="glass-panel rounded-3xl p-6 relative group hover:border-outline-variant transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<span class="bg-error-container/20 text-error p-2 rounded-xl">
+<span class="material-symbols-outlined">health_and_safety</span>
+</span>
+<h3 class="text-on-surface font-bold">Dana Darurat</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-container transition-colors cursor-pointer">more_vert</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-2">
+<span class="text-on-surface-variant">Rp 10Jt / 50Jt</span>
+<span class="text-primary-fixed">20%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed w-[20%] rounded-full shadow-[0_0_8px_rgba(125,244,255,0.5)]"></div>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-xs flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-[14px]">auto_graph</span> Save More Tomorrow
+                        </span>
+</div>
+</div>
+<!-- Secondary Goal Card 2 -->
+<div class="glass-panel rounded-3xl p-6 relative group hover:border-outline-variant transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<span class="bg-secondary-container/20 text-secondary-fixed p-2 rounded-xl">
+<span class="material-symbols-outlined">coffee</span>
+</span>
+<h3 class="text-on-surface font-bold">Kurangi Jajan</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-container transition-colors cursor-pointer">more_vert</span>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-sm mb-2">
+<span class="text-on-surface-variant">Sisa Kuota: Rp 500rb</span>
+<span class="text-secondary-fixed">80%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed w-[80%] rounded-full shadow-[0_0_8px_rgba(248,216,255,0.5)]"></div>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-xs flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-[14px]">warning</span> Hampir Limit
+                        </span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Mobile -->
+<nav class="md:hidden bg-surface/80 backdrop-blur-xl dark:bg-surface/80 fixed bottom-0 w-full rounded-t-[24px] z-50 border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,240,255,0.15)] pb-safe">
+<div class="flex justify-around items-center h-20 px-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl p-2 transition-all" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl p-2 transition-all" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-sm text-label-sm mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-container drop-shadow-[0_0_10px_rgba(0,240,255,0.4)] scale-110 transition-all duration-300 p-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1">Pockets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl p-2 transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm mt-1">Riwayat</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/20 rounded-xl p-2 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profil</span>
+</a>
+</div>
+</nav>
+</body></html>

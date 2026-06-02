@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SATOMI Dashboard - Loading</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#320047",
+                        "on-tertiary-fixed": "#1d1639",
+                        "secondary-fixed": "#f8d8ff",
+                        "on-tertiary-container": "#615a81",
+                        "on-surface": "#e5e1e7",
+                        "on-error": "#690005",
+                        "primary": "#dbfcff",
+                        "on-primary-fixed-variant": "#004f54",
+                        "inverse-on-surface": "#303034",
+                        "tertiary-fixed": "#e6deff",
+                        "inverse-surface": "#e5e1e7",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#cac1ed",
+                        "on-secondary-container": "#480063",
+                        "surface-container-low": "#1b1b1f",
+                        "surface-bright": "#39393d",
+                        "background": "#131317",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353439",
+                        "outline": "#849495",
+                        "on-secondary": "#520071",
+                        "surface-variant": "#353439",
+                        "primary-container": "#00f0ff",
+                        "tertiary-container": "#ddd4ff",
+                        "on-primary": "#00363a",
+                        "surface-container-lowest": "#0e0e12",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#7df4ff",
+                        "on-primary-fixed": "#002022",
+                        "inverse-primary": "#006970",
+                        "surface-container-high": "#2a292e",
+                        "secondary": "#ecb2ff",
+                        "on-primary-container": "#006970",
+                        "tertiary": "#faf4ff",
+                        "surface": "#131317",
+                        "surface-tint": "#00dbe9",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "on-background": "#e5e1e7",
+                        "primary-fixed-dim": "#00dbe9",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "secondary-container": "#cf5cff",
+                        "surface-dim": "#131317",
+                        "outline-variant": "#3b494b",
+                        "on-tertiary-fixed-variant": "#484267",
+                        "surface-container": "#1f1f23",
+                        "on-tertiary": "#322b4f",
+                        "on-surface-variant": "#b9cacb"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        unit: "4px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        gutter: "24px",
+                        "margin-mobile": "16px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "headline-lg-mobile": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+                        "label-sm": ["12px", { lineHeight: "1.0", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-lg": ["40px", { lineHeight: "1.2", fontWeight: "700" }]
+                    },
+                    animation: {
+                        'shimmer': 'shimmer 2s infinite linear',
+                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+                        'typing': 'typing 1.4s infinite ease-in-out both'
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 15px rgba(0, 240, 255, 0.2)' },
+                            '50%': { opacity: .7, boxShadow: '0 0 5px rgba(0, 240, 255, 0.1)' }
+                        },
+                        typing: {
+                            '0%, 80%, 100%': { transform: 'scale(0)' },
+                            '40%': { transform: 'scale(1)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050508;
+            color: #e5e1e7;
+        }
+        .glass-card {
+            background: rgba(14, 14, 18, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card-top-border {
+            border-top: 1px solid rgba(0, 240, 255, 0.3);
+            background: linear-gradient(180deg, rgba(0, 240, 255, 0.05) 0%, rgba(14, 14, 18, 0.6) 100%);
+        }
+        .shimmer-wrapper {
+            position: relative;
+            overflow: hidden;
+            background-color: #1f1f23;
+        }
+        .shimmer-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
+        }
+        .skeleton-neon-edge {
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col relative pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl dark:bg-surface/60 border-b border-outline-variant/20 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">language</span>
+</div>
+<div class="font-display-lg text-headline-lg-mobile tracking-tighter text-primary-container drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">
+                SATOMI
+            </div>
+<div class="flex items-center text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 px-4 md:px-gutter max-w-container-max mx-auto w-full space-y-8">
+<!-- Header Skeleton -->
+<section class="space-y-4 pt-4">
+<div class="h-10 w-3/4 md:w-1/3 rounded-lg shimmer-wrapper skeleton-neon-edge animate-pulse-glow"></div>
+<div class="h-6 w-1/2 md:w-1/4 rounded-lg shimmer-wrapper skeleton-neon-edge"></div>
+</section>
+<!-- AI Status Chip -->
+<section class="flex justify-center md:justify-start">
+<div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-card border border-primary-container/30 shadow-[0_0_15px_rgba(0,240,255,0.15)]">
+<span class="material-symbols-outlined text-primary-container text-sm animate-pulse">robot_2</span>
+<span class="font-label-sm text-label-sm text-primary-container uppercase tracking-widest">Satomi sedang membaca ringkasanmu...</span>
+<div class="flex space-x-1 ml-2">
+<div class="w-1.5 h-1.5 bg-primary-container rounded-full animate-typing" style="animation-delay: 0s"></div>
+<div class="w-1.5 h-1.5 bg-primary-container rounded-full animate-typing" style="animation-delay: 0.2s"></div>
+<div class="w-1.5 h-1.5 bg-primary-container rounded-full animate-typing" style="animation-delay: 0.4s"></div>
+</div>
+</div>
+</section>
+<!-- Large Hero Card Skeleton -->
+<section>
+<div class="w-full h-64 md:h-80 rounded-2xl glass-card glass-card-top-border relative overflow-hidden flex flex-col justify-end p-6">
+<!-- Abstract neon lines placeholder in background -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: linear-gradient(45deg, transparent 45%, rgba(0, 240, 255, 0.4) 50%, transparent 55%), linear-gradient(-45deg, transparent 45%, rgba(207, 92, 255, 0.4) 50%, transparent 55%); background-size: 50px 50px;"></div>
+<div class="space-y-4 relative z-10 w-full md:w-1/2">
+<div class="h-12 w-full rounded-lg shimmer-wrapper skeleton-neon-edge"></div>
+<div class="h-6 w-4/5 rounded-lg shimmer-wrapper skeleton-neon-edge opacity-70"></div>
+</div>
+</div>
+</section>
+<!-- Grid Summary Card Skeletons -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="h-32 rounded-xl glass-card flex flex-col justify-between p-4 shimmer-wrapper skeleton-neon-edge">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest/50"></div>
+<div class="space-y-2">
+<div class="h-4 w-1/2 rounded bg-surface-container-highest/50"></div>
+<div class="h-6 w-3/4 rounded bg-surface-container-highest/80"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="h-32 rounded-xl glass-card flex flex-col justify-between p-4 shimmer-wrapper skeleton-neon-edge">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest/50"></div>
+<div class="space-y-2">
+<div class="h-4 w-1/2 rounded bg-surface-container-highest/50"></div>
+<div class="h-6 w-3/4 rounded bg-surface-container-highest/80"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="h-32 rounded-xl glass-card flex flex-col justify-between p-4 shimmer-wrapper skeleton-neon-edge">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest/50"></div>
+<div class="space-y-2">
+<div class="h-4 w-1/2 rounded bg-surface-container-highest/50"></div>
+<div class="h-6 w-3/4 rounded bg-surface-container-highest/80"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="h-32 rounded-xl glass-card flex flex-col justify-between p-4 shimmer-wrapper skeleton-neon-edge">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest/50"></div>
+<div class="space-y-2">
+<div class="h-4 w-1/2 rounded bg-surface-container-highest/50"></div>
+<div class="h-6 w-3/4 rounded bg-surface-container-highest/80"></div>
+</div>
+</div>
+</section>
+<!-- Chart Placeholder Skeleton -->
+<section>
+<div class="w-full h-72 rounded-2xl glass-card p-6 flex flex-col space-y-6">
+<div class="flex justify-between items-center w-full">
+<div class="h-6 w-1/4 rounded-lg shimmer-wrapper skeleton-neon-edge"></div>
+<div class="h-8 w-24 rounded-full shimmer-wrapper skeleton-neon-edge"></div>
+</div>
+<div class="flex-grow w-full relative flex items-end space-x-2 md:space-x-4 opacity-50">
+<!-- Abstract Bar Skeletons -->
+<div class="w-full bg-surface-container-highest/30 h-1/4 rounded-t-sm relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-primary-container/20 to-transparent"></div></div>
+<div class="w-full bg-surface-container-highest/30 h-1/2 rounded-t-sm relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-primary-container/20 to-transparent"></div></div>
+<div class="w-full bg-surface-container-highest/30 h-3/4 rounded-t-sm relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-primary-container/20 to-transparent"></div></div>
+<div class="w-full bg-surface-container-highest/30 h-full rounded-t-sm relative overflow-hidden shimmer-wrapper"><div class="absolute inset-0 bg-gradient-to-t from-primary-container/50 to-transparent"></div></div>
+<div class="w-full bg-surface-container-highest/30 h-2/3 rounded-t-sm relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-primary-container/20 to-transparent"></div></div>
+<div class="w-full bg-surface-container-highest/30 h-1/3 rounded-t-sm relative overflow-hidden"><div class="absolute inset-0 bg-gradient-to-t from-primary-container/20 to-transparent"></div></div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Skeleton (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full rounded-t-[24px] z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface/80 border-t border-outline-variant/10 shadow-[0_-8px_32px_rgba(0,240,255,0.15)] flex justify-around items-center h-20 px-2 pb-safe">
+<!-- Active Tab Skeleton -->
+<div class="flex flex-col items-center justify-center space-y-1 w-16">
+<div class="w-8 h-8 rounded-lg shimmer-wrapper skeleton-neon-edge bg-primary-container/20"></div>
+<div class="w-10 h-2 rounded shimmer-wrapper skeleton-neon-edge bg-primary-container/20"></div>
+</div>
+<!-- Inactive Tab Skeletons -->
+<div class="flex flex-col items-center justify-center space-y-1 w-16 opacity-50">
+<div class="w-6 h-6 rounded-full shimmer-wrapper bg-surface-container-highest"></div>
+<div class="w-8 h-2 rounded shimmer-wrapper bg-surface-container-highest"></div>
+</div>
+<div class="flex flex-col items-center justify-center space-y-1 w-16 opacity-50">
+<div class="w-6 h-6 rounded-full shimmer-wrapper bg-surface-container-highest"></div>
+<div class="w-8 h-2 rounded shimmer-wrapper bg-surface-container-highest"></div>
+</div>
+<div class="flex flex-col items-center justify-center space-y-1 w-16 opacity-50">
+<div class="w-6 h-6 rounded-full shimmer-wrapper bg-surface-container-highest"></div>
+<div class="w-8 h-2 rounded shimmer-wrapper bg-surface-container-highest"></div>
+</div>
+<div class="flex flex-col items-center justify-center space-y-1 w-16 opacity-50">
+<div class="w-6 h-6 rounded-full shimmer-wrapper bg-surface-container-highest"></div>
+<div class="w-8 h-2 rounded shimmer-wrapper bg-surface-container-highest"></div>
+</div>
+</nav>
+<!-- SideNav Skeleton (Desktop Only) - Represented purely as a structural hint if needed, but per instructions standard BottomNav translates to SideNav on web. Here we just hide the bottom nav on md+ -->
+<div class="hidden md:flex fixed left-0 top-0 h-full w-72 rounded-r-[32px] bg-surface-container-lowest/90 backdrop-blur-2xl dark:bg-surface-container-lowest/90 border-r border-outline-variant/20 shadow-2xl flex-col py-8 pt-24 z-40 opacity-30 pointer-events-none">
+<div class="px-6 pb-8 border-b border-outline-variant/20 mb-4 flex items-center space-x-4">
+<div class="w-12 h-12 rounded-full shimmer-wrapper bg-surface-container-highest"></div>
+<div class="space-y-2 flex-grow">
+<div class="h-4 w-3/4 shimmer-wrapper rounded bg-surface-container-highest"></div>
+<div class="h-3 w-1/2 shimmer-wrapper rounded bg-surface-container-highest"></div>
+</div>
+</div>
+<div class="space-y-4 px-4">
+<div class="h-12 w-full rounded-xl shimmer-wrapper skeleton-neon-edge bg-primary-container/10"></div>
+<div class="h-12 w-full rounded-xl shimmer-wrapper bg-surface-container-highest"></div>
+<div class="h-12 w-full rounded-xl shimmer-wrapper bg-surface-container-highest"></div>
+<div class="h-12 w-full rounded-xl shimmer-wrapper bg-surface-container-highest"></div>
+<div class="h-12 w-full rounded-xl shimmer-wrapper bg-surface-container-highest"></div>
+</div>
+</div>
+</body></html>

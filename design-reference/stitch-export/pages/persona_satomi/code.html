@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Persona Settings - SATOMI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Manrope:wght@400&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#353439",
+                    "inverse-on-surface": "#303034",
+                    "surface-container-high": "#2a292e",
+                    "on-secondary-container": "#480063",
+                    "on-surface": "#e5e1e7",
+                    "on-primary-fixed-variant": "#004f54",
+                    "tertiary-fixed-dim": "#cac1ed",
+                    "on-tertiary-fixed": "#1d1639",
+                    "on-background": "#e5e1e7",
+                    "on-surface-variant": "#b9cacb",
+                    "on-primary-fixed": "#002022",
+                    "on-primary-container": "#006970",
+                    "outline-variant": "#3b494b",
+                    "surface": "#131317",
+                    "surface-container-low": "#1b1b1f",
+                    "primary": "#dbfcff",
+                    "error": "#ffb4ab",
+                    "inverse-primary": "#006970",
+                    "background": "#131317",
+                    "primary-fixed": "#7df4ff",
+                    "primary-fixed-dim": "#00dbe9",
+                    "on-tertiary-fixed-variant": "#484267",
+                    "on-secondary-fixed": "#320047",
+                    "surface-container-lowest": "#0e0e12",
+                    "secondary": "#ecb2ff",
+                    "on-secondary-fixed-variant": "#74009f",
+                    "error-container": "#93000a",
+                    "on-primary": "#00363a",
+                    "inverse-surface": "#e5e1e7",
+                    "surface-dim": "#131317",
+                    "on-tertiary": "#322b4f",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#1f1f23",
+                    "outline": "#849495",
+                    "tertiary": "#faf4ff",
+                    "on-tertiary-container": "#615a81",
+                    "surface-tint": "#00dbe9",
+                    "secondary-fixed-dim": "#ecb2ff",
+                    "surface-bright": "#39393d",
+                    "primary-container": "#00f0ff",
+                    "on-secondary": "#520071",
+                    "surface-container-highest": "#353439",
+                    "secondary-container": "#cf5cff",
+                    "tertiary-container": "#ddd4ff",
+                    "secondary-fixed": "#f8d8ff",
+                    "tertiary-fixed": "#e6deff",
+                    "on-error": "#690005"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "unit": "4px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-md": ["Manrope"],
+                    "headline-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #050508; /* Obsidian base */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 219, 233, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 178, 255, 0.05), transparent 25%);
+            background-attachment: fixed;
+            color: #e5e1e7;
+        }
+        
+        .glass-card {
+            background: rgba(19, 19, 23, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card-active {
+            background: rgba(19, 19, 23, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid;
+            border-image: linear-gradient(135deg, #00dbe9, #ecb2ff) 1;
+            box-shadow: 0 0 30px rgba(0, 219, 233, 0.2);
+        }
+
+        .light-streak::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 30%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00dbe9, transparent);
+            z-index: 10;
+        }
+
+        .input-dark {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(132, 148, 149, 0.3);
+            transition: all 0.3s ease;
+        }
+        .input-dark:focus {
+            border-color: #00dbe9;
+            box-shadow: inset 0 0 10px rgba(0, 219, 233, 0.1);
+            outline: none;
+        }
+
+        .btn-primary {
+            background: #dbfcff;
+            color: #002022;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(0, 219, 233, 0.6);
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #dbfcff;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 10px rgba(0, 219, 233, 0.8);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        
+        .persona-preview-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 219, 233, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-white/10 shadow-none flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4">
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors duration-300 cursor-pointer active:scale-95 transition-transform flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-display-lg text-headline-lg-mobile md:text-headline-lg font-extrabold tracking-tighter text-primary dark:text-primary-fixed drop-shadow-[0_0_10px_rgba(0,219,233,0.5)]">
+            SATOMI
+        </div>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors duration-300 cursor-pointer active:scale-95 transition-transform flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 pb-32 md:pb-12">
+<div class="mb-10 text-center md:text-left">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Persona Satomi</h1>
+<p class="text-on-surface-variant max-w-2xl">Configure how your AI financial assistant communicates and interacts with you.</p>
+</div>
+<div class="grid grid-cols-4 md:grid-cols-12 gap-gutter">
+<!-- Persona Selection Bento Grid -->
+<div class="col-span-4 md:col-span-8 flex flex-col gap-6">
+<section>
+<h2 class="font-label-sm text-label-sm uppercase text-outline mb-4 tracking-widest">Communication Style</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="persona-options">
+<!-- Option 1 -->
+<div class="glass-card relative p-6 rounded-xl cursor-pointer hover:bg-surface-container-high transition-all group" onclick="selectPersona(this, 'Lembut dan suportif')">
+<div class="light-streak hidden group-hover:block"></div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<h3 class="font-bold text-on-surface">Lembut &amp; Suportif</h3>
+</div>
+<div class="w-5 h-5 rounded-full border border-outline flex items-center justify-center radio-indicator"></div>
+</div>
+<p class="text-sm text-on-surface-variant">Empathetic and encouraging tone. Focuses on positive reinforcement.</p>
+</div>
+<!-- Option 2 -->
+<div class="glass-card relative p-6 rounded-xl cursor-pointer hover:bg-surface-container-high transition-all group" onclick="selectPersona(this, 'Tegas tapi sopan')">
+<div class="light-streak hidden group-hover:block"></div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<h3 class="font-bold text-on-surface">Tegas tapi Sopan</h3>
+</div>
+<div class="w-5 h-5 rounded-full border border-outline flex items-center justify-center radio-indicator"></div>
+</div>
+<p class="text-sm text-on-surface-variant">Direct, professional, and clear. Focuses on accountability.</p>
+</div>
+<!-- Option 3 (Active Default) -->
+<div class="glass-card-active relative p-6 rounded-xl cursor-pointer group" onclick="selectPersona(this, 'Santai dan friendly')">
+<div class="light-streak"></div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mood</span>
+</div>
+<h3 class="font-bold text-on-surface">Santai &amp; Friendly</h3>
+</div>
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center radio-indicator">
+<span class="material-symbols-outlined text-[14px] text-on-primary">check</span>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant">Casual, approachable, and slightly playful. Uses modern slang.</p>
+</div>
+<!-- Option 4 -->
+<div class="glass-card relative p-6 rounded-xl cursor-pointer hover:bg-surface-container-high transition-all group" onclick="selectPersona(this, 'Minimal dan langsung')">
+<div class="light-streak hidden group-hover:block"></div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-outline/20 flex items-center justify-center text-outline">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<h3 class="font-bold text-on-surface">Minimal &amp; Langsung</h3>
+</div>
+<div class="w-5 h-5 rounded-full border border-outline flex items-center justify-center radio-indicator"></div>
+</div>
+<p class="text-sm text-on-surface-variant">Strictly data-driven. Zero fluff. Pure financial utility.</p>
+</div>
+</div>
+</section>
+<section class="glass-card rounded-xl p-6 mt-4 relative overflow-hidden">
+<div class="light-streak"></div>
+<h2 class="font-label-sm text-label-sm uppercase text-outline mb-6 tracking-widest">Behavioral Controls</h2>
+<div class="space-y-8">
+<!-- Slider 1 -->
+<div>
+<div class="flex justify-between items-end mb-4">
+<div>
+<label class="font-bold text-on-surface block">Nudge Intensity</label>
+<span class="text-sm text-on-surface-variant">How strongly Satomi warns you about overspending.</span>
+</div>
+<span class="font-label-sm text-primary" id="intensity-val">Medium</span>
+</div>
+<div class="relative w-full">
+<input class="w-full" id="nudge-intensity" max="3" min="1" oninput="updateSliderLabel('nudge-intensity', 'intensity-val', ['Soft', 'Medium', 'Aggressive'])" type="range" value="2"/>
+<div class="flex justify-between text-xs text-outline mt-2 px-1">
+<span>Soft</span>
+<span>Aggressive</span>
+</div>
+</div>
+</div>
+<!-- Slider 2 -->
+<div>
+<div class="flex justify-between items-end mb-4">
+<div>
+<label class="font-bold text-on-surface block">Nudge Frequency</label>
+<span class="text-sm text-on-surface-variant">How often Satomi checks in on your pockets.</span>
+</div>
+<span class="font-label-sm text-primary" id="freq-val">Weekly</span>
+</div>
+<div class="relative w-full">
+<input class="w-full" id="nudge-freq" max="3" min="1" oninput="updateSliderLabel('nudge-freq', 'freq-val', ['Rarely', 'Weekly', 'Daily'])" type="range" value="2"/>
+<div class="flex justify-between text-xs text-outline mt-2 px-1">
+<span>Rarely</span>
+<span>Daily</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Preview Card -->
+<div class="col-span-4 md:col-span-4 flex flex-col gap-6">
+<section class="sticky top-24">
+<h2 class="font-label-sm text-label-sm uppercase text-outline mb-4 tracking-widest">Live Preview</h2>
+<div class="glass-card rounded-xl p-6 relative overflow-hidden flex flex-col h-[400px]">
+<div class="persona-preview-glow"></div>
+<div class="light-streak"></div>
+<div class="flex-grow flex flex-col justify-end gap-4 pb-4">
+<!-- System Context -->
+<div class="text-center text-xs text-outline-variant mb-2">
+                                Today, 14:30 - Coffee Shop Transaction
+                            </div>
+<!-- User Msg -->
+<div class="self-end bg-surface-variant text-on-surface px-4 py-2 rounded-2xl rounded-tr-sm max-w-[80%] shadow-lg">
+                                Just bought iced coffee. ☕️
+                            </div>
+<!-- Satomi Msg -->
+<div class="self-start flex gap-3 max-w-[90%]">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-[0_0_15px_rgba(0,219,233,0.4)]">
+<span class="material-symbols-outlined text-[16px] text-on-primary">smart_toy</span>
+</div>
+<div class="bg-surface-container-high border border-primary/20 text-on-surface px-4 py-3 rounded-2xl rounded-tl-sm shadow-lg relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<p class="relative z-10 leading-relaxed text-sm" id="preview-text">
+                                        Waduh, pocket jajan mulai tipis nih... Udah 80% limit bulan ini lho. Mending besok bikin kopi sendiri aja ya! 😅
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Mock Input -->
+<div class="mt-auto relative">
+<input class="input-dark w-full rounded-full py-3 px-4 text-sm text-on-surface placeholder-outline-variant" disabled="" placeholder="Type a message..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary" disabled="">
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</div>
+<div class="mt-6">
+<button class="btn-primary w-full py-3 rounded-lg font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                            Save Persona
+                        </button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Navigation Shell Suppressed as per instructions: Settings screen implies task-focus/departure from main flow. Canvas prioritized. -->
+<script>
+        const previewResponses = {
+            'Lembut dan suportif': 'Hai! Kopi memang enak buat semangat ya. 😊 Sekadar mengingatkan, budget jajan kamu tinggal 20% bulan ini. Pelan-pelan ya pengeluarannya biar aman sampai akhir bulan.',
+            'Tegas tapi sopan': 'Transaksi tercatat. Mohon diperhatikan bahwa alokasi dana konsumtif Anda sudah mencapai batas 80%. Harap kurangi pengeluaran serupa untuk minggu ini.',
+            'Santai dan friendly': 'Waduh, pocket jajan mulai tipis nih... Udah 80% limit bulan ini lho. Mending besok bikin kopi sendiri aja ya! 😅',
+            'Minimal dan langsung': 'Coffee: -Rp 45.000. Sisa budget konsumtif: Rp 120.000 (Peringatan: Kapasitas <20%).'
+        };
+
+        function selectPersona(element, type) {
+            // Reset all cards
+            const cards = document.getElementById('persona-options').children;
+            for(let card of cards) {
+                card.className = 'glass-card relative p-6 rounded-xl cursor-pointer hover:bg-surface-container-high transition-all group';
+                const indicator = card.querySelector('.radio-indicator');
+                indicator.className = 'w-5 h-5 rounded-full border border-outline flex items-center justify-center radio-indicator';
+                indicator.innerHTML = '';
+            }
+
+            // Set active card
+            element.className = 'glass-card-active relative p-6 rounded-xl cursor-pointer group';
+            const activeIndicator = element.querySelector('.radio-indicator');
+            activeIndicator.className = 'w-5 h-5 rounded-full bg-primary flex items-center justify-center radio-indicator';
+            activeIndicator.innerHTML = '<span class="material-symbols-outlined text-[14px] text-on-primary">check</span>';
+
+            // Update preview text
+            const previewText = document.getElementById('preview-text');
+            previewText.style.opacity = 0;
+            setTimeout(() => {
+                previewText.innerText = previewResponses[type];
+                previewText.style.opacity = 1;
+            }, 200);
+        }
+
+        function updateSliderLabel(sliderId, labelId, values) {
+            const val = document.getElementById(sliderId).value;
+            document.getElementById(labelId).innerText = values[val - 1];
+        }
+    </script>
+</body></html>
