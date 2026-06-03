@@ -14,7 +14,7 @@ export function MobileBottomNav({
   return (
     <nav
       className={cn(
-        "safe-bottom fixed inset-x-0 bottom-0 z-40 rounded-t-[28px] border-t border-white/10 bg-satomi-surface/90 px-3 pt-3 shadow-[0_-18px_45px_rgba(0,0,0,0.55)] backdrop-blur-2xl md:hidden",
+        "fixed inset-x-0 bottom-0 z-40 rounded-t-[28px] border-t border-white/10 bg-satomi-surface/90 px-3 pb-[calc(0.75rem+var(--safe-area-bottom))] pt-3 shadow-[0_-18px_45px_rgba(0,0,0,0.55)] backdrop-blur-2xl md:hidden",
         className,
       )}
       aria-label="Navigasi utama"

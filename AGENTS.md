@@ -90,7 +90,44 @@ Create reusable components:
 - BillCard
 - EmptyState
 - LoadingState
+## Future Android Target: PWA + Trusted Web Activity
 
+SATOMI will later be packaged as an Android app using Progressive Web App + Trusted Web Activity.
+
+The frontend must be built with TWA readiness in mind.
+
+Requirements:
+- mobile-first layout
+- installable PWA
+- responsive on small Android screens
+- touch-friendly UI
+- no hover-only interactions
+- no desktop-only navigation dependency
+- safe area support for fullscreen mobile mode
+- app-like navigation
+- stable loading, error, and offline states
+- dark theme status bar and theme color
+- web app manifest
+- app icons
+- service worker
+- offline fallback page
+
+Avoid:
+- tiny tap targets
+- fixed widths that overflow mobile
+- modals that break on mobile
+- desktop-only hover menus
+- pages that show blank screen when offline
+- UI that depends on browser address bar
+
+TWA later requires:
+- production HTTPS URL
+- valid manifest
+- service worker
+- Digital Asset Links
+- Android package name
+- SHA-256 signing certificate fingerprint
+- assetlinks.json hosted at /.well-known/assetlinks.json
 ## Important Rule
 
 Use dummy data first.

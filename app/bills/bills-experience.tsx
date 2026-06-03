@@ -264,7 +264,7 @@ function BillModal({
           if (event.key === "Escape" || event.key === "Enter") onClose();
         }}
       />
-      <GlassCard className="relative z-10 w-full rounded-b-none p-5 md:max-w-xl md:rounded-3xl md:p-6">
+      <GlassCard className="relative z-10 max-h-[calc(100dvh-var(--safe-area-top)-var(--safe-area-bottom)-1rem)] w-full overflow-y-auto rounded-b-none p-5 md:max-w-xl md:rounded-3xl md:p-6">
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-satomi-cyan">

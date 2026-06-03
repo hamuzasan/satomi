@@ -3,6 +3,9 @@
 :root {
   --background: #050508;
   --foreground: #e5e1e7;
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --satomi-mobile-nav-height: 6.5rem;
   --satomi-bg: #050508;
   --satomi-bg-deep: #020617;
   --satomi-surface: #131317;
@@ -59,10 +62,13 @@
 
 html {
   min-height: 100%;
+  overflow-x: hidden;
   background: var(--satomi-bg);
+  scroll-padding-top: calc(5rem + var(--safe-area-top));
 }
 
 body {
+  width: 100%;
   min-height: 100vh;
   background:
     radial-gradient(circle at 50% -15%, rgba(0, 240, 255, 0.12), transparent 38rem),
@@ -70,6 +76,7 @@ body {
     linear-gradient(180deg, #050508 0%, #020617 48%, #050508 100%);
   color: var(--foreground);
   font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
+  overscroll-behavior-y: none;
   text-rendering: geometricPrecision;
 }
 
@@ -81,6 +88,14 @@ body {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select,
+textarea,
+a {
+  touch-action: manipulation;
 }
 
 .satomi-ambient {
@@ -123,9 +138,9 @@ a {
 }
 
 .safe-bottom {
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: max(0.75rem, var(--safe-area-bottom));
 }
 
 .safe-top {
-  padding-top: env(safe-area-inset-top);
+  padding-top: var(--safe-area-top);
 }

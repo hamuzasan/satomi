@@ -164,7 +164,7 @@ function ClarificationState() {
 
 function Composer() {
   return (
-    <div className="safe-bottom fixed inset-x-0 bottom-[84px] z-30 border-t border-white/5 bg-satomi-bg/75 px-4 py-3 backdrop-blur-2xl md:absolute md:bottom-0 md:px-8">
+    <div className="fixed inset-x-0 bottom-[calc(var(--satomi-mobile-nav-height)+var(--safe-area-bottom))] z-30 border-t border-white/5 bg-satomi-bg/75 px-4 py-3 backdrop-blur-2xl md:absolute md:bottom-0 md:px-8">
       <div className="mx-auto flex max-w-3xl items-center gap-3 rounded-full border border-satomi-outline/35 bg-satomi-surface-mid/85 p-2 shadow-[0_0_34px_rgba(0,240,255,0.10)]">
         <button
           type="button"
@@ -307,7 +307,7 @@ function MobileTransactionSheet({
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-[170px] z-20 transition-transform duration-300 md:hidden",
+        "fixed inset-x-0 bottom-[calc(var(--satomi-mobile-nav-height)+5.25rem+var(--safe-area-bottom))] z-20 transition-transform duration-300 md:hidden",
         isOpen ? "translate-y-0" : "translate-y-[calc(100%-58px)]",
       )}
     >
@@ -353,7 +353,7 @@ function EditTransactionSheet({
           if (event.key === "Escape" || event.key === "Enter") onClose();
         }}
       />
-      <GlassCard className="relative z-10 w-full rounded-b-none p-5 md:max-w-xl md:rounded-3xl md:p-6">
+      <GlassCard className="relative z-10 max-h-[calc(100dvh-var(--safe-area-top)-var(--safe-area-bottom)-1rem)] w-full overflow-y-auto rounded-b-none p-5 md:max-w-xl md:rounded-3xl md:p-6">
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-satomi-cyan">

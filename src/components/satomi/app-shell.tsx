@@ -28,7 +28,7 @@ export function AppShell({
 
       <main
         className={cn(
-          "relative z-10 mx-auto flex w-full max-w-[1280px] flex-col gap-6 px-4 pb-32 pt-24 md:pl-[20rem] md:pr-8 md:pt-28",
+          "relative z-10 mx-auto flex w-full max-w-[1280px] flex-col gap-6 px-4 pb-[calc(var(--satomi-mobile-nav-height)+2rem+var(--safe-area-bottom))] pt-[calc(5.5rem+var(--safe-area-top))] md:pb-10 md:pl-[20rem] md:pr-8 md:pt-28",
           className,
         )}
       >
