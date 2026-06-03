@@ -107,7 +107,7 @@ export function BillsExperience() {
           </h2>
           <button
             type="button"
-            className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-satomi-cyan transition hover:text-satomi-cyan-soft"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl px-3 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-satomi-cyan transition hover:bg-satomi-cyan/10 hover:text-satomi-cyan-soft"
           >
             Lihat Semua
           </button>

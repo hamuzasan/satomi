@@ -154,7 +154,7 @@ function MainGoalCard() {
             </p>
             <Link
               href="/goals/dana-jepang"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-satomi-cyan transition hover:text-satomi-cyan-soft"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold text-satomi-cyan transition hover:bg-satomi-cyan/10 hover:text-satomi-cyan-soft"
             >
               Detail
               <ArrowRight className="size-4" />

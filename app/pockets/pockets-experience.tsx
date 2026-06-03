@@ -124,7 +124,7 @@ function PocketSummaryCard() {
         </p>
       </div>
       <p className="text-satomi-muted">Total Alokasi</p>
-      <p className="mt-2 font-display text-5xl font-extrabold tracking-normal text-satomi-text md:text-6xl">
+      <p className="mt-2 break-words font-display text-4xl font-extrabold tracking-normal text-satomi-text sm:text-5xl md:text-6xl">
         {pocketOverview.totalAllocation}
       </p>
       <div className="mt-7 rounded-2xl border border-satomi-cyan/20 bg-satomi-cyan/8 p-4">

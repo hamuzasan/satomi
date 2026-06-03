@@ -1,4 +1,4 @@
-const CACHE_VERSION = "satomi-pwa-v1";
+const CACHE_VERSION = "satomi-pwa-v2";
 const OFFLINE_URL = "/offline.html";
 const APP_SHELL_CACHE = [
   OFFLINE_URL,

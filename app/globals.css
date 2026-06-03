@@ -62,21 +62,25 @@
 
 html {
   min-height: 100%;
+  min-height: 100dvh;
   overflow-x: hidden;
   background: var(--satomi-bg);
   scroll-padding-top: calc(5rem + var(--safe-area-top));
+  touch-action: pan-y pinch-zoom;
 }
 
 body {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   background:
     radial-gradient(circle at 50% -15%, rgba(0, 240, 255, 0.12), transparent 38rem),
     radial-gradient(circle at 100% 15%, rgba(207, 92, 255, 0.10), transparent 28rem),
     linear-gradient(180deg, #050508 0%, #020617 48%, #050508 100%);
   color: var(--foreground);
   font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y pinch-zoom;
   text-rendering: geometricPrecision;
 }
 
@@ -103,6 +107,7 @@ a {
     radial-gradient(circle at 18% 4%, rgba(0, 240, 255, 0.14), transparent 24rem),
     radial-gradient(circle at 92% 18%, rgba(207, 92, 255, 0.12), transparent 28rem),
     linear-gradient(180deg, rgba(5, 5, 8, 0.96), rgba(2, 6, 23, 0.98));
+  touch-action: pan-y pinch-zoom;
 }
 
 .satomi-grid {
@@ -143,4 +148,12 @@ a {
 
 .safe-top {
   padding-top: var(--safe-area-top);
+}
+
+.satomi-scrollbar-none {
+  scrollbar-width: none;
+}
+
+.satomi-scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

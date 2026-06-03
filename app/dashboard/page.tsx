@@ -331,7 +331,7 @@ function DashboardSection({
         {action ? (
           <a
             href="#"
-            className="text-sm font-medium text-satomi-text transition hover:text-satomi-cyan"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl px-3 text-sm font-medium text-satomi-text transition hover:bg-white/5 hover:text-satomi-cyan"
           >
             {action}
           </a>

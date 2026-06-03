@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 import {
   PWAInstallHint,
+  ScrollInputBridge,
   ServiceWorkerRegister,
 } from "@/src/components/satomi";
 import "./globals.css";
@@ -74,6 +75,7 @@ export default function RootLayout({
     >
       <body className="min-h-full overflow-x-hidden">
         {children}
+        <ScrollInputBridge />
         <ServiceWorkerRegister />
         <PWAInstallHint />
       </body>

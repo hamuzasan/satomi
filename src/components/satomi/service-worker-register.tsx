@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
+import { isCapacitorApp, isClient } from "@/src/lib/platform";
 
 export function ServiceWorkerRegister() {
   useEffect(() => {
-    if (!("serviceWorker" in navigator)) return;
+    if (!isClient() || isCapacitorApp() || !("serviceWorker" in navigator)) {
+      return;
+    }
 
     if (process.env.NODE_ENV !== "production") {
       navigator.serviceWorker
@@ -24,7 +27,7 @@ export function ServiceWorkerRegister() {
       try {
         await navigator.serviceWorker.register("/sw.js", { scope: "/" });
       } catch {
-        // PWA registration should never block the finance UI.
+        // Browser/PWA registration should never block the finance UI.
       }
     };
 

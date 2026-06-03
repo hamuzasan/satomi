@@ -12,6 +12,7 @@ export { PageTitle } from "./page-title";
 export { PublicShell } from "./public-shell";
 export { PWAInstallHint } from "./pwa-install-hint";
 export { SatomiMark } from "./satomi-mark";
+export { ScrollInputBridge } from "./scroll-input-bridge";
 export { ServiceWorkerRegister } from "./service-worker-register";
 export { StatCard } from "./stat-card";
 export { StatePanel } from "./state-panel";

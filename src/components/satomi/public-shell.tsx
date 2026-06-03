@@ -17,7 +17,7 @@ export function PublicShell({
   className,
 }: PublicShellProps) {
   return (
-    <div className="satomi-ambient relative min-h-dvh overflow-hidden text-satomi-text">
+    <div className="satomi-ambient relative min-h-dvh overflow-x-hidden text-satomi-text">
       <div className="satomi-grid pointer-events-none fixed inset-0 opacity-55" />
       <div className="pointer-events-none fixed left-1/2 top-0 size-[34rem] -translate-x-1/2 rounded-full bg-satomi-cyan/10 blur-[120px]" />
       <div className="pointer-events-none fixed bottom-0 right-0 size-[28rem] rounded-full bg-satomi-purple/10 blur-[110px]" />

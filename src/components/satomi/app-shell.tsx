@@ -18,7 +18,7 @@ export function AppShell({
   className,
 }: AppShellProps) {
   return (
-    <div className="satomi-ambient min-h-dvh overflow-hidden text-satomi-text">
+    <div className="satomi-ambient min-h-dvh overflow-x-hidden text-satomi-text">
       <div className="satomi-grid pointer-events-none fixed inset-0 opacity-70" />
       <div className="pointer-events-none fixed -left-28 top-20 size-80 rounded-full bg-satomi-cyan/10 blur-[90px]" />
       <div className="pointer-events-none fixed -right-24 top-72 size-96 rounded-full bg-satomi-purple/10 blur-[110px]" />

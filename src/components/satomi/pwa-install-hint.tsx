@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Download, X } from "lucide-react";
+import { isCapacitorApp, isClient, isMobileBrowser } from "@/src/lib/platform";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -14,6 +15,8 @@ export function PWAInstallHint() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
+    if (!isClient() || isCapacitorApp() || !isMobileBrowser()) return;
+
     const handler = (event: Event) => {
       event.preventDefault();
       setInstallEvent(event as BeforeInstallPromptEvent);
@@ -24,7 +27,7 @@ export function PWAInstallHint() {
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
-  if (!installEvent || isDismissed) return null;
+  if (!installEvent || isDismissed || isCapacitorApp() || !isMobileBrowser()) return null;
 
   return (
     <div className="fixed inset-x-3 bottom-[calc(6.5rem+env(safe-area-inset-bottom))] z-[60] mx-auto max-w-md rounded-3xl border border-satomi-cyan/30 bg-satomi-surface/95 p-4 text-satomi-text shadow-[0_0_36px_rgba(0,240,255,0.18)] backdrop-blur-2xl md:hidden">
