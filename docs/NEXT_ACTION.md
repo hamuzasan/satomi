@@ -1,32 +1,33 @@
 # SATOMI Next Action
 
-## Exact Next Prompt For Profiles And First Protected Data
+## Exact Next Prompt For Goals, Bills, And Profile Persistence
 
 ```text
-Continue the SATOMI project.
+Continue SATOMI.
 
 Current phase:
-Phase 15 - profiles and first authenticated data wiring.
+Phase 16 - goals, bills, and profile persistence.
 
 Read only:
 - docs/PROJECT_STATUS.md
+- docs/DATA_INTEGRATION.md
 - docs/AUTH_FLOW.md
 - docs/BACKEND_IMPLEMENTATION_PLAN.md
 - supabase/schema.sql
-- src/lib/supabase/client.ts
-- src/lib/supabase/server.ts
-- app/dashboard/page.tsx
-- current dummy transaction data source
+- current /goals page
+- current /bills page
+- current /settings/persona
+- current /settings/privacy
+- current dashboard page
 
 Task:
-Connect SATOMI to Supabase for the first real authenticated data read/write flow.
+Extend Supabase integration beyond transactions and pockets.
 
-Implement only:
-1. profile bootstrap/read
-2. transactions list read
-3. create manual transaction flow
-4. dashboard summary backed by real transactions where possible
-5. keep dummy fallback only where data is not integrated yet
+Implement:
+1. load and persist profile preferences where safe
+2. goals list/detail integration
+3. bills list integration
+4. dashboard summary improvements using goals and bills when available
 
 Do not implement:
 - AI extraction
@@ -34,6 +35,7 @@ Do not implement:
 - Capacitor
 - Android project
 - service role usage
+- push notifications
 
 Run:
 - npm run lint
@@ -41,10 +43,10 @@ Run:
 
 After completion:
 - summarize changed files
-- list remaining dummy-data areas
-- list required Supabase dashboard settings
+- list remaining dummy-data surfaces
+- explain how to test goals, bills, and settings persistence
 ```
 
 ## Why This Is Safest
 
-Auth is now the stable entry point. The next clean move is to connect one user-owned data flow end to end before expanding into the rest of the finance features.
+Transactions and pockets are now live. The next clean step is to widen the authenticated data surface while keeping the same Supabase/RLS pattern and avoiding AI or native complexity too early.

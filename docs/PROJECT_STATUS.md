@@ -4,7 +4,7 @@ Last updated: 2026-06-04
 
 ## Current Phase
 
-SATOMI is currently in Phase 14 - Supabase client and auth integration.
+SATOMI is currently in Phase 15 - Transactions and Smart Pockets Supabase integration.
 
 The safest interpretation is:
 
@@ -16,7 +16,8 @@ The safest interpretation is:
 - Phase 12 Supabase backend planning is completed in documentation.
 - Phase 13 initial Supabase SQL schema is created.
 - Phase 14 Supabase client and auth foundation is implemented locally.
-- Actual authenticated app CRUD, production deployment, Lighthouse validation, real AI extraction, and Android wrapper work are not started yet.
+- Phase 15 transactions, pockets, pocket detail, and dashboard Supabase integration is implemented locally.
+- Goals, bills, AI extraction, route handlers, production verification, and Android wrapper work are not started yet.
 
 ## Project Shape
 
@@ -134,11 +135,21 @@ Auth foundation now exists:
 - login, register, and forgot-password client flows
 - `docs/AUTH_FLOW.md`
 
+Data integration now exists:
+
+- `docs/DATA_INTEGRATION.md`
+- direct Supabase-authenticated transactions CRUD
+- direct Supabase-authenticated pockets CRUD
+- safe pocket delete guard from the UI
+- real pocket detail page data
+- dashboard summary, recent transactions, and pocket overview from Supabase
+
 Still not done yet:
 
-- no authenticated CRUD pages
+- no profile settings page persistence
+- no goals CRUD
+- no bills CRUD
 - no route handlers
-- no dashboard aggregation from Supabase
 - no logout surface
 - no password update page
 - no live verification against a real Supabase project yet
@@ -146,7 +157,7 @@ Still not done yet:
 ## Known Risks And Remaining Work
 
 - Placeholder icons may need final brand-approved replacement before production.
-- Vercel deployment still needs to be performed manually.
+- Vercel redeploy and production verification still need to be completed for the newest data integration changes.
 - PWA behavior still needs production HTTPS verification after deploy.
 - Supabase project may still need to be created manually.
 - SQL may still need to be executed manually in Supabase.
@@ -154,7 +165,7 @@ Still not done yet:
 - Android Chrome installability still needs device testing.
 - Offline fallback still needs installed-PWA testing.
 - Capacitor WebView behavior still needs real wrapper testing after Capacitor is installed in a later phase.
-- API base URL and deeper auth/session behavior must be revisited when CRUD and route handlers begin.
+- API base URL and deeper auth/session behavior must be revisited when route handlers begin.
 - `assetlinks.json` must not be guessed; it requires Android package and signing fingerprint data.
 
 ## Latest Verification
@@ -166,7 +177,7 @@ npm run lint
 npm run build
 ```
 
-These commands must pass again for Phase 14 after auth integration changes.
+These commands passed again after Phase 15 transactions and pockets integration changes.
 
 Also verified locally on `http://localhost:3002` during deployment-readiness:
 
@@ -179,15 +190,14 @@ Also verified locally on `http://localhost:3002` during deployment-readiness:
 
 ## Next Recommended Task
 
-Begin authenticated data integration after auth foundation is verified.
+Expand authenticated finance coverage beyond transactions and pockets.
 
 The next phase should:
 
-1. create the Supabase project if it does not exist yet
-2. run `supabase/schema.sql` in the Supabase SQL Editor
-3. add local and Vercel env vars
-4. verify register, login, and reset-email flows against the real project
-5. connect `profiles`
-6. connect transactions first, then dashboard aggregation
+1. verify Phase 15 flows against the live Supabase project on Vercel
+2. connect profile settings persistence
+3. connect goals
+4. connect bills
+5. enrich dashboard aggregation with those new sources
 
-Do not implement AI extraction, Capacitor, notification reading, or service-role logic until basic authenticated data flows are stable.
+Do not implement AI extraction, Capacitor, notification reading, or service-role logic until the core finance CRUD surfaces are stable.

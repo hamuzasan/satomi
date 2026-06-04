@@ -17,7 +17,7 @@ export type TransactionRecord = {
   amount: string;
   rawAmount: number;
   type: TransactionType;
-  dateGroup: "Hari Ini" | "Kemarin";
+  dateGroup: string;
   time: string;
   pocket: string;
   note: string;
