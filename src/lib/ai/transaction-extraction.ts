@@ -33,6 +33,19 @@ export const extractionPreviewSchema = z.object({
 
 export type TransactionExtractionPreview = z.infer<typeof extractionPreviewSchema>;
 
+const extractionPreviewInputSchema = z.object({
+  amount: z.number().positive().nullish(),
+  type: z.enum(["income", "expense"]).nullish(),
+  category: z.string().trim().nullish(),
+  pocketSuggestion: z.string().trim().nullish(),
+  description: z.string().trim().nullish(),
+  date: z.string().trim().nullish(),
+  confidence: z.number().min(0).max(1).nullish(),
+  needsClarification: z.boolean().nullish(),
+  clarificationQuestion: z.string().trim().nullish(),
+  nudge: extractionNudgeSchema.nullish(),
+});
+
 type ExtractionContext = {
   pocketNames: string[];
   commonCategories: string[];
@@ -191,6 +204,7 @@ export function buildTransactionExtractionPrompt({
     "Balas dengan JSON saja, tanpa markdown.",
     "Jangan mengarang nominal. Jika nominal belum jelas, set needsClarification=true dan isi clarificationQuestion.",
     "Jika transaksi tampak pemasukan, set type=income. Jika pengeluaran, set type=expense.",
+    "Selalu kembalikan semua key ini walau nilainya null: amount, type, category, pocketSuggestion, description, date, confidence, needsClarification, clarificationQuestion, nudge.",
     "Gunakan salah satu kategori yang masuk akal. Kategori historis pengguna:",
     context.commonCategories.length > 0 ? context.commonCategories.join(", ") : "Makanan, Transport, Tagihan, Self-Reward, Pemasukan, Lainnya",
     "Sarankan pocket berdasarkan daftar pocket pengguna ini:",
@@ -350,6 +364,36 @@ async function callGeminiExtraction({
   return text;
 }
 
+function parseTransactionExtractionPreview(raw: unknown) {
+  const parsed = extractionPreviewInputSchema.parse(raw);
+  const normalizedBase = {
+    amount: parsed.amount ?? null,
+    type: parsed.type ?? null,
+    category: parsed.category ?? null,
+    pocketSuggestion: parsed.pocketSuggestion ?? null,
+    description: parsed.description ?? null,
+    date: parsed.date ?? null,
+  };
+  const needsClarification = parsed.needsClarification ?? normalizedBase.amount === null;
+  const confidence =
+    parsed.confidence ??
+    inferConfidence({
+      amount: normalizedBase.amount,
+      type: normalizedBase.type,
+      category: normalizedBase.category,
+      pocketSuggestion: normalizedBase.pocketSuggestion,
+    });
+
+  return extractionPreviewSchema.parse({
+    ...normalizedBase,
+    confidence,
+    needsClarification,
+    clarificationQuestion:
+      parsed.clarificationQuestion ?? (needsClarification ? "Nominalnya berapa?" : null),
+    nudge: parsed.nudge ?? null,
+  });
+}
+
 export async function requestTransactionExtraction({
   message,
   context,
@@ -381,7 +425,7 @@ export async function requestTransactionExtraction({
       prompt,
     });
     const parsed = JSON.parse(raw) as unknown;
-    return extractionPreviewSchema.parse(parsed);
+    return parseTransactionExtractionPreview(parsed);
   }
 
   if (provider === "gemini" || provider === "google" || provider === "google-ai") {
@@ -391,7 +435,7 @@ export async function requestTransactionExtraction({
       prompt,
     });
     const parsed = JSON.parse(raw) as unknown;
-    return extractionPreviewSchema.parse(parsed);
+    return parseTransactionExtractionPreview(parsed);
   }
 
   throw new Error(`AI provider '${provider}' belum didukung.`);
