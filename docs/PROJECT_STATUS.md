@@ -4,7 +4,7 @@ Last updated: 2026-06-04
 
 ## Current Phase
 
-SATOMI is currently in Phase 16 - Goals and Bills Supabase integration.
+SATOMI is currently in Phase 17 - Dashboard aggregation and insights.
 
 The safest interpretation is:
 
@@ -18,6 +18,7 @@ The safest interpretation is:
 - Phase 14 Supabase client and auth foundation is implemented locally.
 - Phase 15 transactions, pockets, pocket detail, and dashboard Supabase integration is implemented locally.
 - Phase 16 goals, goal detail, bills, and dashboard goal/bill integration is implemented locally.
+- Phase 17 dashboard monthly aggregation and insights integration is implemented locally.
 - AI extraction, route handlers, deeper profile persistence, production verification, and Android wrapper work are not started yet.
 
 ## Project Shape
@@ -139,6 +140,7 @@ Auth foundation now exists:
 Data integration now exists:
 
 - `docs/DATA_INTEGRATION.md`
+- `docs/DASHBOARD_AGGREGATION.md`
 - direct Supabase-authenticated transactions CRUD
 - direct Supabase-authenticated pockets CRUD
 - safe pocket delete guard from the UI
@@ -148,6 +150,7 @@ Data integration now exists:
 - bill paid-state update from the UI
 - real pocket detail page data
 - dashboard summary, recent transactions, pocket overview, goal progress, and due-soon bills from Supabase
+- insights category breakdown, weekly trend, top categories, and nudge history from Supabase-backed data
 
 Still not done yet:
 
@@ -157,6 +160,7 @@ Still not done yet:
 - no password update page
 - no live verification against a real Supabase project yet
 - transactions and pockets edit surfaces still use older raw form primitives compared with the new goals/bills dialogs
+- dashboard and insights aggregation is still client-side only
 
 ## Known Risks And Remaining Work
 
@@ -181,7 +185,7 @@ npm run lint
 npm run build
 ```
 
-These commands passed again after Phase 16 goals and bills integration changes.
+These commands passed again after Phase 17 dashboard and insights aggregation changes.
 
 Also verified locally on `http://localhost:3002` during deployment-readiness:
 
@@ -194,11 +198,11 @@ Also verified locally on `http://localhost:3002` during deployment-readiness:
 
 ## Next Recommended Task
 
-Stabilize the authenticated finance surfaces that now cover transactions, pockets, goals, and bills.
+Stabilize the authenticated finance surfaces that now cover transactions, pockets, goals, bills, dashboard aggregation, and insights.
 
 The next phase should:
 
-1. verify Phase 16 flows against the live Supabase project on Vercel
+1. verify Phase 17 flows against the live Supabase project on Vercel
 2. connect profile settings persistence
 3. modernize older transactions and pockets form primitives onto the same newer UI base
 4. consider a route-handler validation boundary where it adds real safety

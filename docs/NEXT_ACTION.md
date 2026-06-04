@@ -1,16 +1,17 @@
 # SATOMI Next Action
 
-## Exact Next Prompt For Profile Persistence And UI Modernization
+## Exact Next Prompt For Profile Persistence And Finance Form Modernization
 
 ```text
 Continue SATOMI.
 
 Current phase:
-Phase 17 - profile persistence and finance form modernization.
+Phase 18 - profile persistence and finance form modernization.
 
 Read only:
 - docs/PROJECT_STATUS.md
 - docs/DATA_INTEGRATION.md
+- docs/DASHBOARD_AGGREGATION.md
 - docs/AUTH_FLOW.md
 - docs/BACKEND_IMPLEMENTATION_PLAN.md
 - supabase/schema.sql
@@ -20,7 +21,7 @@ Read only:
 - current /pockets page
 
 Task:
-Stabilize the authenticated finance frontend after Phase 16.
+Stabilize the authenticated finance frontend after Phase 17.
 
 Implement:
 1. load and persist profile preferences where safe
@@ -48,4 +49,4 @@ After completion:
 
 ## Why This Is Safest
 
-Transactions, pockets, goals, and bills are now live. The next clean step is to stabilize settings persistence and bring the older finance editors onto the same more modern UI primitive base before widening scope again.
+Transactions, pockets, goals, bills, dashboard aggregation, and insights are now live. The next clean step is to stabilize settings persistence and bring the older finance editors onto the same more modern UI primitive base before widening scope again.

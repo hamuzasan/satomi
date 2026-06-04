@@ -11,16 +11,9 @@ import {
 import Link from "next/link";
 import { AppShell, GlassCard, LoadingState, StatCard } from "@/src/components/satomi";
 import { type DashboardTone } from "@/src/lib/satomi-dashboard-data";
+import { buildPocketNudge } from "@/src/lib/satomi-finance";
+import { buildDashboardViewModel } from "@/src/lib/satomi-analytics";
 import {
-  buildDashboardPockets,
-  buildDashboardRecentTransactions,
-  buildDashboardSummary,
-  buildPocketNudge,
-  mapPocketRowToRecord,
-} from "@/src/lib/satomi-finance";
-import {
-  buildDashboardBillsDueSoon,
-  buildDashboardGoal,
   getDashboardGoalTone,
 } from "@/src/lib/satomi-goals-bills";
 import { useFinanceSnapshot } from "@/src/lib/supabase/use-finance-snapshot";
@@ -90,16 +83,22 @@ export function DashboardExperience() {
 
   const pockets = snapshot?.pockets ?? [];
   const transactions = snapshot?.transactions ?? [];
-  const pocketRecords = pockets.map((pocket) => mapPocketRowToRecord(pocket, transactions));
-  const summary = buildDashboardSummary(transactions, pocketRecords);
-  const pocketCards = buildDashboardPockets(pocketRecords);
-  const pocketNameById = new Map(pockets.map((pocket) => [pocket.id, pocket.name]));
-  const recentTransactions = buildDashboardRecentTransactions(transactions, pocketNameById);
-  const nudgeMessage = buildPocketNudge(pocketRecords);
   const goals = snapshot?.goals ?? [];
   const bills = snapshot?.bills ?? [];
-  const dashboardGoal = buildDashboardGoal(goals);
-  const billsDueSoon = buildDashboardBillsDueSoon(bills, pockets);
+  const {
+    summary,
+    pocketRecords,
+    pocketCards,
+    recentTransactions,
+    dashboardGoal,
+    billsDueSoon,
+  } = buildDashboardViewModel({
+    transactions,
+    pockets,
+    goals,
+    bills,
+  });
+  const nudgeMessage = buildPocketNudge(pocketRecords);
   const profileName = snapshot?.profileName?.trim() || "Kamu";
   const budgetLeft = summary[2]?.value ?? "Rp0";
   const income = summary[0]?.value ?? "Rp0";
@@ -433,7 +432,7 @@ function DashboardSection({
 function PocketOverview({
   pocket,
 }: {
-  pocket: ReturnType<typeof buildDashboardPockets>[number];
+  pocket: ReturnType<typeof buildDashboardViewModel>["pocketCards"][number];
 }) {
   const Icon = pocket.icon;
 

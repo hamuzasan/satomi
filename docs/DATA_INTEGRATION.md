@@ -4,7 +4,7 @@ Last updated: 2026-06-04
 
 ## Scope
 
-Phase 16 now connects the main authenticated finance data flows directly from the frontend to Supabase:
+Phase 17 now connects the main authenticated finance data flows directly from the frontend to Supabase:
 
 - transactions CRUD
 - pockets CRUD
@@ -15,6 +15,7 @@ Phase 16 now connects the main authenticated finance data flows directly from th
 - bill paid-state updates
 - dashboard summary, recent transactions, and pocket overview
 - dashboard goal progress and bills due soon
+- insights category, weekly trend, top-category, and nudge-history aggregation
 
 This phase still does **not** implement:
 
@@ -174,7 +175,7 @@ If transactions or pockets move into `/api/*` routes later, those responses must
 
 ## Recommended Next Step
 
-Phase 17 should connect:
+Phase 18 should connect:
 
 1. profile settings read/write
 2. transactions and pockets form modernization onto the new UI primitive base

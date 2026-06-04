@@ -5,6 +5,7 @@ export type TransactionRow = Tables<"transactions">;
 export type PocketRow = Tables<"pockets">;
 export type GoalRow = Tables<"goals">;
 export type BillRow = Tables<"bills">;
+export type NudgeRow = Tables<"nudges">;
 type ProfileRow = Tables<"profiles">;
 
 export type TransactionInput = {
@@ -51,6 +52,7 @@ export type FinanceSnapshot = {
   pockets: PocketRow[];
   goals: GoalRow[];
   bills: BillRow[];
+  nudges: NudgeRow[];
 };
 
 function normalizeSupabaseError(error: unknown, fallback: string) {
@@ -90,6 +92,7 @@ export async function fetchFinanceSnapshot(
     { data: pockets, error: pocketsError },
     { data: goals, error: goalsError },
     { data: bills, error: billsError },
+    { data: nudges, error: nudgesError },
     { data: profile },
   ] =
     await Promise.all([
@@ -100,6 +103,7 @@ export async function fetchFinanceSnapshot(
       supabase.from("pockets").select("*").order("created_at", { ascending: true }),
       supabase.from("goals").select("*").order("created_at", { ascending: true }),
       supabase.from("bills").select("*").order("due_date", { ascending: true }),
+      supabase.from("nudges").select("*").order("created_at", { ascending: false }),
       supabase.from("profiles").select("name").eq("id", userId).maybeSingle(),
     ]);
 
@@ -136,6 +140,12 @@ export async function fetchFinanceSnapshot(
     );
   }
 
+  if (nudgesError) {
+    throw new Error(
+      normalizeSupabaseError(nudgesError, "Riwayat nudge belum bisa dimuat dari Supabase."),
+    );
+  }
+
   return {
     userId,
     profileName: (profile as Pick<ProfileRow, "name"> | null)?.name ?? null,
@@ -143,6 +153,7 @@ export async function fetchFinanceSnapshot(
     pockets: pockets ?? [],
     goals: goals ?? [],
     bills: bills ?? [],
+    nudges: nudges ?? [],
   };
 }
 
