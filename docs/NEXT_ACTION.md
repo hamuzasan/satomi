@@ -1,50 +1,50 @@
 # SATOMI Next Action
 
-## Exact Next Prompt After Manual Vercel Deployment
+## Exact Next Prompt For Profiles And First Protected Data
 
 ```text
-Continue SATOMI after Phase 11.5D - Vercel deployment readiness completed.
+Continue the SATOMI project.
 
-Do not implement backend, Supabase, real auth, real AI extraction, Capacitor
-installation, native Android files, or notification reading yet.
+Current phase:
+Phase 15 - profiles and first authenticated data wiring.
 
-I have deployed the static SATOMI frontend to Vercel.
+Read only:
+- docs/PROJECT_STATUS.md
+- docs/AUTH_FLOW.md
+- docs/BACKEND_IMPLEMENTATION_PLAN.md
+- supabase/schema.sql
+- src/lib/supabase/client.ts
+- src/lib/supabase/server.ts
+- app/dashboard/page.tsx
+- current dummy transaction data source
 
-1. Read:
-   - docs/PROJECT_STATUS.md
-   - docs/DEPLOYMENT.md
-   - docs/PWA_CAPACITOR_READINESS.md
-   - docs/PWA_AUDIT_CHECKLIST.md
-   - docs/API_RUNTIME_STRATEGY.md
-   - docs/CAPACITOR_READINESS_CHECKLIST.md
-2. Verify the deployed production URL:
-   - manifest route
-   - icons and favicon
-   - offline fallback
-   - service worker caching boundaries
-   - metadata and theme color
-   - route loading/error states
-   - Android Chrome mobile layout
-   - PWA installability
-3. Document any production-only issues.
-4. Do not create Android/TWA/Capacitor wrapper files yet.
-5. Run locally:
-   - npm run lint
-   - npm run build
-6. Report:
-   - production PWA readiness status
-   - manual Android Chrome installability checks
-   - remaining issues before Supabase backend planning
-   - what must be completed before installing Capacitor
+Task:
+Connect SATOMI to Supabase for the first real authenticated data read/write flow.
 
-Keep all UI copy in Bahasa Indonesia.
-Use dummy data only.
+Implement only:
+1. profile bootstrap/read
+2. transactions list read
+3. create manual transaction flow
+4. dashboard summary backed by real transactions where possible
+5. keep dummy fallback only where data is not integrated yet
+
+Do not implement:
+- AI extraction
+- notification candidates
+- Capacitor
+- Android project
+- service role usage
+
+Run:
+- npm run lint
+- npm run build
+
+After completion:
+- summarize changed files
+- list remaining dummy-data areas
+- list required Supabase dashboard settings
 ```
 
 ## Why This Is Safest
 
-The frontend is locally ready for Vercel: lint and build pass, requested routes
-return `200`, PWA assets are present, and deployment instructions exist.
-
-The next highest-value step is manual production HTTPS validation before
-Supabase backend planning or any Capacitor work.
+Auth is now the stable entry point. The next clean move is to connect one user-owned data flow end to end before expanding into the rest of the finance features.

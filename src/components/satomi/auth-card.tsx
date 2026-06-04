@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Mail, Lock, UserRound } from "lucide-react";
+import { cn } from "@/src/lib/utils";
 import { GlassCard } from "./glass-card";
 import { SatomiMark } from "./satomi-mark";
 
@@ -33,15 +34,31 @@ export function AuthCard({ title, description, children, footer }: AuthCardProps
 }
 
 export function AuthField({
+  id,
+  name,
   label,
   placeholder,
   type = "text",
   icon = "mail",
+  value,
+  onChange,
+  autoComplete,
+  disabled = false,
+  required = false,
+  minLength,
 }: {
+  id?: string;
+  name?: string;
   label: string;
   placeholder: string;
   type?: string;
   icon?: "mail" | "lock" | "user";
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  autoComplete?: string;
+  disabled?: boolean;
+  required?: boolean;
+  minLength?: number;
 }) {
   const Icon = icon === "lock" ? Lock : icon === "user" ? UserRound : Mail;
 
@@ -53,9 +70,17 @@ export function AuthField({
       <span className="mt-3 flex min-h-14 items-center gap-4 rounded-2xl border border-white/15 bg-white px-4 text-satomi-bg shadow-[0_0_20px_rgba(0,240,255,0.08)]">
         <Icon className="size-5 text-satomi-outline" />
         <input
+          id={id}
+          name={name}
           className="min-w-0 flex-1 bg-transparent text-lg text-satomi-bg outline-none placeholder:text-slate-500"
           placeholder={placeholder}
           type={type}
+          value={value}
+          onChange={onChange}
+          autoComplete={autoComplete}
+          disabled={disabled}
+          required={required}
+          minLength={minLength}
         />
       </span>
     </label>
@@ -64,17 +89,35 @@ export function AuthField({
 
 export function AuthPrimaryButton({
   children,
-  href = "/dashboard",
+  href,
+  type = "button",
+  disabled = false,
 }: {
   children: ReactNode;
   href?: string;
+  type?: "button" | "submit";
+  disabled?: boolean;
 }) {
+  const className = cn(
+    "inline-flex min-h-14 w-full items-center justify-center rounded-2xl bg-satomi-cyan px-6 font-mono text-xs font-bold uppercase tracking-[0.22em] text-satomi-bg shadow-[0_0_30px_rgba(0,240,255,0.28)] transition hover:bg-satomi-cyan-soft",
+    disabled && "cursor-not-allowed opacity-60 hover:bg-satomi-cyan",
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={className}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className="inline-flex min-h-14 w-full items-center justify-center rounded-2xl bg-satomi-cyan px-6 font-mono text-xs font-bold uppercase tracking-[0.22em] text-satomi-bg shadow-[0_0_30px_rgba(0,240,255,0.28)] transition hover:bg-satomi-cyan-soft"
+    <button
+      type={type}
+      disabled={disabled}
+      className={className}
     >
       {children}
-    </Link>
+    </button>
   );
 }

@@ -1,13 +1,23 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import {
-  AuthCard,
-  AuthField,
-  AuthPrimaryButton,
-  PublicShell,
-} from "@/src/components/satomi";
+import { redirect } from "next/navigation";
+import { AuthCard, PublicShell } from "@/src/components/satomi";
+import { ForgotPasswordForm } from "@/src/components/satomi/forgot-password-form";
+import { hasSupabaseEnv } from "@/src/lib/supabase/config";
+import { createSupabaseServerClient } from "@/src/lib/supabase/server";
 
-export default function ForgotPasswordPage() {
+export default async function ForgotPasswordPage() {
+  if (hasSupabaseEnv()) {
+    const supabase = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      redirect("/dashboard");
+    }
+  }
+
   return (
     <PublicShell compact showNav={false}>
       <AuthCard
@@ -23,15 +33,7 @@ export default function ForgotPasswordPage() {
           </Link>
         }
       >
-        <div className="space-y-6">
-          <AuthField label="Email" placeholder="nama@email.com" type="email" />
-          <AuthPrimaryButton href="/login">
-            <span className="inline-flex items-center gap-3">
-              Kirim link reset
-              <ArrowRight className="size-4" />
-            </span>
-          </AuthPrimaryButton>
-        </div>
+        <ForgotPasswordForm />
       </AuthCard>
     </PublicShell>
   );

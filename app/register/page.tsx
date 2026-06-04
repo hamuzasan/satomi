@@ -1,12 +1,22 @@
 import Link from "next/link";
-import {
-  AuthCard,
-  AuthField,
-  AuthPrimaryButton,
-  PublicShell,
-} from "@/src/components/satomi";
+import { redirect } from "next/navigation";
+import { AuthCard, PublicShell } from "@/src/components/satomi";
+import { RegisterForm } from "@/src/components/satomi/register-form";
+import { hasSupabaseEnv } from "@/src/lib/supabase/config";
+import { createSupabaseServerClient } from "@/src/lib/supabase/server";
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+  if (hasSupabaseEnv()) {
+    const supabase = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (user) {
+      redirect("/dashboard");
+    }
+  }
+
   return (
     <PublicShell compact showNav={false}>
       <AuthCard
@@ -21,33 +31,7 @@ export default function RegisterPage() {
           </p>
         }
       >
-        <div className="space-y-5">
-          <AuthField label="Nama" placeholder="Masukkan nama lengkap" icon="user" />
-          <AuthField label="Email" placeholder="contoh@email.com" type="email" />
-          <AuthField
-            label="Password"
-            placeholder="Minimal 8 karakter"
-            type="password"
-            icon="lock"
-          />
-          <AuthField
-            label="Konfirmasi password"
-            placeholder="Ulangi password"
-            type="password"
-            icon="lock"
-          />
-          <label className="flex items-start gap-3 text-satomi-muted">
-            <input className="mt-1 size-5 rounded border-white/20 bg-black/20" type="checkbox" />
-            <span>
-              Saya setuju dengan{" "}
-              <Link href="/settings/privacy" className="text-satomi-text underline">
-                Kebijakan Privasi SATOMI
-              </Link>
-              .
-            </span>
-          </label>
-          <AuthPrimaryButton href="/onboarding">Daftar</AuthPrimaryButton>
-        </div>
+        <RegisterForm />
       </AuthCard>
     </PublicShell>
   );
