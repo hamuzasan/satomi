@@ -56,6 +56,7 @@ type ExtractionResult = {
   confidence: number | null;
   needsClarification: boolean;
   clarificationQuestion: string | null;
+  assistantMessage: string;
   nudge: NudgeWarning | null;
 };
 
@@ -129,6 +130,10 @@ export function ChatExperience() {
     const combinedMessage = clarificationBaseMessage
       ? `${clarificationBaseMessage}. ${message}`
       : message;
+    const history = messages.slice(-6).map((item) => ({
+      role: item.role,
+      content: item.content,
+    }));
 
     try {
       const response = await fetch("/api/chat/extract", {
@@ -136,7 +141,7 @@ export function ChatExperience() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: combinedMessage }),
+        body: JSON.stringify({ message: combinedMessage, history }),
       });
 
       const payload = (await response.json()) as
@@ -156,9 +161,7 @@ export function ChatExperience() {
       const satomiMessage: ConversationMessage = {
         id: `satomi-${Date.now()}`,
         role: "satomi",
-        content: extraction.needsClarification
-          ? extraction.clarificationQuestion || "Nominalnya berapa?"
-          : buildSatomiSummary(extraction),
+        content: extraction.assistantMessage,
       };
 
       setMessages((current) => [...current, satomiMessage]);
@@ -784,13 +787,6 @@ function mapDateKeywordToLabel(date: string | null) {
   if (date === "yesterday") return "Kemarin";
   if (date === "today" || !date) return "Hari ini";
   return date;
-}
-
-function buildSatomiSummary(preview: ExtractionResult) {
-  const amount = preview.amount ? formatCurrency(preview.amount) : "nominal belum jelas";
-  const type = preview.type === "income" ? "pemasukan" : "pengeluaran";
-  const category = preview.category ? preview.category.toLowerCase() : "lainnya";
-  return `Aku deteksi ini sebagai ${type} ${category} sebesar ${amount}. Cek preview dulu sebelum disimpan ya.`;
 }
 
 function formatTimeNow() {

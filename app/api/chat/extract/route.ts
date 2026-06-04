@@ -75,6 +75,7 @@ export async function POST(request: Request) {
         context: {
           pocketNames: (pockets ?? []).map((pocket) => pocket.name),
           commonCategories,
+          history: parsed.data.history ?? [],
         },
       }),
     );

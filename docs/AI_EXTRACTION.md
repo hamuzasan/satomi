@@ -12,6 +12,8 @@ Current implementation covers:
 - strict request validation
 - strict response validation
 - Bahasa Indonesia casual-message understanding
+- warmer conversational SATOMI reply text from the server
+- lightweight recent-chat context for follow-up continuity
 - chat preview rendering
 - clarification flow when the amount is missing
 - optional pocket-threshold nudge pre-check
@@ -108,6 +110,8 @@ The prompt builder currently tells the model to:
 
 - understand casual Bahasa Indonesia
 - detect forms like `35 ribu`, `35k`, `150rb`, `2 juta`
+- sound natural and supportive instead of robotic
+- ask one concise follow-up question when the message is incomplete
 - infer `income` vs `expense`
 - suggest category
 - suggest pocket from the user's actual pockets
@@ -154,6 +158,7 @@ It can currently infer:
 - likely description
 - simple pocket suggestion
 - `today` / `yesterday`
+- natural fallback clarification text
 
 It exists so local development remains testable before production AI env is ready.
 
@@ -192,7 +197,7 @@ If logging fails, extraction still returns the preview successfully. This keeps 
 Current `/chat` flow:
 
 1. user sends a message
-2. frontend calls `/api/chat/extract`
+2. frontend sends the latest message plus a short recent chat history to `/api/chat/extract`
 3. SATOMI shows either:
    - clarification question
    - transaction preview
@@ -205,7 +210,7 @@ Current `/chat` flow:
 - no multi-turn model memory beyond the frontend combining clarification replies with the previous ambiguous message
 - extraction save still happens client-side after confirmation, not through a dedicated confirm route
 - provider support is intentionally narrow
-- category and pocket suggestion are still lightweight heuristics even when AI is unavailable
+- category and pocket suggestion are still lightweight heuristics when provider output is weak or fallback mode is used
 - no real AI extraction analytics dashboard yet
 
 ## Recommended Next Step

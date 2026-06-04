@@ -6,6 +6,15 @@ import type { Database } from "@/src/lib/supabase/types";
 
 export const chatExtractRequestSchema = z.object({
   message: z.string().trim().min(1, "Pesan wajib diisi.").max(500, "Pesan terlalu panjang."),
+  history: z
+    .array(
+      z.object({
+        role: z.enum(["user", "satomi"]),
+        content: z.string().trim().min(1).max(500),
+      }),
+    )
+    .max(8)
+    .optional(),
 });
 
 export const extractionNudgeSchema = z.object({
@@ -28,6 +37,7 @@ export const extractionPreviewSchema = z.object({
   confidence: z.number().min(0).max(1).nullable(),
   needsClarification: z.boolean(),
   clarificationQuestion: z.string().trim().nullable(),
+  assistantMessage: z.string().trim(),
   nudge: extractionNudgeSchema.nullable(),
 });
 
@@ -43,12 +53,17 @@ const extractionPreviewInputSchema = z.object({
   confidence: z.number().min(0).max(1).nullish(),
   needsClarification: z.boolean().nullish(),
   clarificationQuestion: z.string().trim().nullish(),
+  assistantMessage: z.string().trim().nullish(),
   nudge: extractionNudgeSchema.nullish(),
 });
 
 type ExtractionContext = {
   pocketNames: string[];
   commonCategories: string[];
+  history: Array<{
+    role: "user" | "satomi";
+    content: string;
+  }>;
 };
 
 const CATEGORY_RULES: Array<{ pattern: RegExp; category: string }> = [
@@ -198,19 +213,34 @@ export function buildTransactionExtractionPrompt({
   message: string;
   context: ExtractionContext;
 }) {
+  const historyBlock =
+    context.history.length > 0
+      ? context.history
+          .slice(-6)
+          .map((item) => `${item.role === "user" ? "User" : "SATOMI"}: ${item.content}`)
+          .join("\n")
+      : "Belum ada riwayat chat.";
+
   return [
-    "Kamu adalah extractor transaksi untuk aplikasi keuangan SATOMI.",
+    "Kamu adalah SATOMI, AI finance companion yang hangat, natural, ringkas, dan terasa seperti manusia saat membalas chat.",
+    "Tugasmu ada dua sekaligus: memahami maksud user lalu menyiapkan preview transaksi yang aman sebelum disimpan.",
     "Pahami Bahasa Indonesia santai dan bentuk nominal seperti 35 ribu, 35k, 150rb, 2 juta.",
     "Balas dengan JSON saja, tanpa markdown.",
-    "Jangan mengarang nominal. Jika nominal belum jelas, set needsClarification=true dan isi clarificationQuestion.",
+    "Jangan mengarang detail penting. Kalau data belum cukup, jangan error: tanyakan satu pertanyaan lanjutan yang paling penting dulu.",
+    "Prioritas klarifikasi: amount, lalu type bila benar-benar ambigu. Jangan minta category jika masih bisa disimpulkan wajar.",
     "Jika transaksi tampak pemasukan, set type=income. Jika pengeluaran, set type=expense.",
-    "Selalu kembalikan semua key ini walau nilainya null: amount, type, category, pocketSuggestion, description, date, confidence, needsClarification, clarificationQuestion, nudge.",
+    "assistantMessage harus terdengar natural, suportif, dan tidak kaku. Hindari terdengar seperti parser robot.",
+    "Kalau data belum lengkap, assistantMessage dan clarificationQuestion harus selaras dan terasa seperti chat manusia.",
+    "Kalau data sudah cukup, assistantMessage menjelaskan hasil singkat dan mengajak user cek preview sebelum simpan.",
+    "Selalu kembalikan semua key ini walau nilainya null: amount, type, category, pocketSuggestion, description, date, confidence, needsClarification, clarificationQuestion, assistantMessage, nudge.",
     "Gunakan salah satu kategori yang masuk akal. Kategori historis pengguna:",
     context.commonCategories.length > 0 ? context.commonCategories.join(", ") : "Makanan, Transport, Tagihan, Self-Reward, Pemasukan, Lainnya",
     "Sarankan pocket berdasarkan daftar pocket pengguna ini:",
     context.pocketNames.length > 0 ? context.pocketNames.join(", ") : "Belum ada pocket",
     "Gunakan date='today' atau 'yesterday' bila cocok.",
     "Bila tidak perlu nudge, set nudge=null.",
+    "Riwayat chat terbaru:",
+    historyBlock,
     `Pesan pengguna: ${message}`,
   ].join("\n");
 }
@@ -240,6 +270,7 @@ export function buildMockTransactionExtraction({
       confidence: 0.28,
       needsClarification: true,
       clarificationQuestion: "Nominalnya berapa?",
+      assistantMessage: "Boleh, aku bantu catat. Nominalnya berapa dulu biar aku bisa bikin preview yang pas?",
       nudge: null,
     };
   }
@@ -254,6 +285,7 @@ export function buildMockTransactionExtraction({
     confidence: inferConfidence({ amount, type: type ?? "expense", category, pocketSuggestion }),
     needsClarification: false,
     clarificationQuestion: null,
+    assistantMessage: `Oke, aku sudah tangkap transaksinya sebagai ${type === "income" ? "pemasukan" : "pengeluaran"} ${category.toLowerCase()} sebesar ${formatCurrency(amount)}. Cek preview-nya dulu ya sebelum disimpan.`,
     nudge: null,
   };
 }
@@ -366,15 +398,23 @@ async function callGeminiExtraction({
 
 function parseTransactionExtractionPreview(raw: unknown) {
   const parsed = extractionPreviewInputSchema.parse(raw);
+  const resolvedType =
+    parsed.type ??
+    (parsed.category === "Pemasukan" ? "income" : parsed.amount ? "expense" : null);
+  const resolvedCategory =
+    parsed.category ??
+    (resolvedType === "income" ? "Pemasukan" : parsed.amount ? "Lainnya" : null);
   const normalizedBase = {
     amount: parsed.amount ?? null,
-    type: parsed.type ?? null,
-    category: parsed.category ?? null,
+    type: resolvedType,
+    category: resolvedCategory,
     pocketSuggestion: parsed.pocketSuggestion ?? null,
     description: parsed.description ?? null,
     date: parsed.date ?? null,
   };
-  const needsClarification = parsed.needsClarification ?? normalizedBase.amount === null;
+  const needsClarification =
+    parsed.needsClarification ??
+    (normalizedBase.amount === null || normalizedBase.type === null);
   const confidence =
     parsed.confidence ??
     inferConfidence({
@@ -383,13 +423,23 @@ function parseTransactionExtractionPreview(raw: unknown) {
       category: normalizedBase.category,
       pocketSuggestion: normalizedBase.pocketSuggestion,
     });
+  const clarificationQuestion =
+    parsed.clarificationQuestion ?? buildClarificationQuestion(normalizedBase.amount, normalizedBase.type);
 
   return extractionPreviewSchema.parse({
     ...normalizedBase,
     confidence,
     needsClarification,
-    clarificationQuestion:
-      parsed.clarificationQuestion ?? (needsClarification ? "Nominalnya berapa?" : null),
+    clarificationQuestion: needsClarification ? clarificationQuestion : null,
+    assistantMessage:
+      parsed.assistantMessage ??
+      buildAssistantMessage({
+        amount: normalizedBase.amount,
+        type: normalizedBase.type,
+        category: normalizedBase.category,
+        needsClarification,
+        clarificationQuestion,
+      }),
     nudge: parsed.nudge ?? null,
   });
 }
@@ -419,23 +469,31 @@ export async function requestTransactionExtraction({
   }
 
   if (provider === "openai") {
-    const raw = await callOpenAiExtraction({
-      apiKey,
-      model: configuredModel || "gpt-4o-mini",
-      prompt,
-    });
-    const parsed = JSON.parse(raw) as unknown;
-    return parseTransactionExtractionPreview(parsed);
+    try {
+      const raw = await callOpenAiExtraction({
+        apiKey,
+        model: configuredModel || "gpt-4o-mini",
+        prompt,
+      });
+      const parsed = JSON.parse(raw) as unknown;
+      return parseTransactionExtractionPreview(parsed);
+    } catch {
+      return buildMockTransactionExtraction({ message, context });
+    }
   }
 
   if (provider === "gemini" || provider === "google" || provider === "google-ai") {
-    const raw = await callGeminiExtraction({
-      apiKey,
-      model: configuredModel || "gemini-2.5-flash",
-      prompt,
-    });
-    const parsed = JSON.parse(raw) as unknown;
-    return parseTransactionExtractionPreview(parsed);
+    try {
+      const raw = await callGeminiExtraction({
+        apiKey,
+        model: configuredModel || "gemini-2.5-flash",
+        prompt,
+      });
+      const parsed = JSON.parse(raw) as unknown;
+      return parseTransactionExtractionPreview(parsed);
+    } catch {
+      return buildMockTransactionExtraction({ message, context });
+    }
   }
 
   throw new Error(`AI provider '${provider}' belum didukung.`);
@@ -532,11 +590,59 @@ export function normalizeExtractionPreview(preview: TransactionExtractionPreview
   if (preview.needsClarification && !preview.clarificationQuestion) {
     return {
       ...preview,
-      clarificationQuestion: "Nominalnya berapa?",
+      clarificationQuestion: buildClarificationQuestion(preview.amount, preview.type),
+      assistantMessage: buildAssistantMessage({
+        amount: preview.amount,
+        type: preview.type,
+        category: preview.category,
+        needsClarification: true,
+        clarificationQuestion: buildClarificationQuestion(preview.amount, preview.type),
+      }),
     };
   }
 
   return preview;
+}
+
+function buildClarificationQuestion(
+  amount: number | null,
+  type: "income" | "expense" | null,
+) {
+  if (!amount) {
+    return "Nominalnya berapa?";
+  }
+
+  if (!type) {
+    return "Ini termasuk pemasukan atau pengeluaran?";
+  }
+
+  return "Boleh lengkapi detail transaksinya sedikit lagi?";
+}
+
+function buildAssistantMessage({
+  amount,
+  type,
+  category,
+  needsClarification,
+  clarificationQuestion,
+}: {
+  amount: number | null;
+  type: "income" | "expense" | null;
+  category: string | null;
+  needsClarification: boolean;
+  clarificationQuestion: string | null;
+}) {
+  if (needsClarification) {
+    return clarificationQuestion
+      ? `Siap, aku bantu catat. ${clarificationQuestion}`
+      : "Siap, aku bantu catat. Aku butuh sedikit detail lagi dulu ya.";
+  }
+
+  const amountLabel = amount ? formatCurrency(amount) : "nominal yang belum pasti";
+  const typeLabel = type === "income" ? "pemasukan" : "pengeluaran";
+  const categoryLabel = category ? category.toLowerCase() : "lainnya";
+
+  return `Oke, ini kelihatannya ${typeLabel} ${categoryLabel} sebesar ${amountLabel}. Aku sudah siapkan preview-nya, cek dulu sebelum disimpan ya.`;
 }
 
 export async function logExtractionPreview({
