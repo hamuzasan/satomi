@@ -246,9 +246,11 @@ export function buildMockTransactionExtraction({
 
 async function callOpenAiExtraction({
   apiKey,
+  model,
   prompt,
 }: {
   apiKey: string;
+  model: string;
   prompt: string;
 }) {
   const response = await fetch("https://api.openai.com/v1/responses", {
@@ -258,7 +260,7 @@ async function callOpenAiExtraction({
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "gpt-4o-mini",
+      model,
       input: [
         {
           role: "system",
@@ -289,6 +291,65 @@ async function callOpenAiExtraction({
   return payload.output_text;
 }
 
+async function callGeminiExtraction({
+  apiKey,
+  model,
+  prompt,
+}: {
+  apiKey: string;
+  model: string;
+  prompt: string;
+}) {
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": apiKey,
+    },
+    body: JSON.stringify({
+      system_instruction: {
+        parts: [{ text: "Ekstrak transaksi ke JSON yang sangat ketat." }],
+      },
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: prompt }],
+        },
+      ],
+      generationConfig: {
+        responseMimeType: "application/json",
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("AI provider belum bisa merespons sekarang.");
+  }
+
+  const payload = (await response.json()) as {
+    candidates?: Array<{
+      content?: {
+        parts?: Array<{
+          text?: string;
+        }>;
+      };
+    }>;
+  };
+
+  const text =
+    payload.candidates
+      ?.flatMap((candidate) => candidate.content?.parts ?? [])
+      .map((part) => part.text?.trim())
+      .filter((part): part is string => Boolean(part))
+      .join("\n") ?? "";
+
+  if (!text) {
+    throw new Error("AI provider tidak mengembalikan JSON yang bisa dibaca.");
+  }
+
+  return text;
+}
+
 export async function requestTransactionExtraction({
   message,
   context,
@@ -298,6 +359,7 @@ export async function requestTransactionExtraction({
 }) {
   const provider = process.env.AI_PROVIDER?.trim().toLowerCase();
   const apiKey = process.env.AI_API_KEY?.trim();
+  const configuredModel = process.env.AI_MODEL?.trim();
   const prompt = buildTransactionExtractionPrompt({ message, context });
 
   if (!provider || !apiKey) {
@@ -312,13 +374,27 @@ export async function requestTransactionExtraction({
     return buildMockTransactionExtraction({ message, context });
   }
 
-  if (provider !== "openai") {
-    throw new Error(`AI provider '${provider}' belum didukung.`);
+  if (provider === "openai") {
+    const raw = await callOpenAiExtraction({
+      apiKey,
+      model: configuredModel || "gpt-4o-mini",
+      prompt,
+    });
+    const parsed = JSON.parse(raw) as unknown;
+    return extractionPreviewSchema.parse(parsed);
   }
 
-  const raw = await callOpenAiExtraction({ apiKey, prompt });
-  const parsed = JSON.parse(raw) as unknown;
-  return extractionPreviewSchema.parse(parsed);
+  if (provider === "gemini" || provider === "google" || provider === "google-ai") {
+    const raw = await callGeminiExtraction({
+      apiKey,
+      model: configuredModel || "gemini-2.5-flash",
+      prompt,
+    });
+    const parsed = JSON.parse(raw) as unknown;
+    return extractionPreviewSchema.parse(parsed);
+  }
+
+  throw new Error(`AI provider '${provider}' belum didukung.`);
 }
 
 function findPocketBySuggestion(suggestion: string | null, pockets: PocketRow[]) {

@@ -40,6 +40,7 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 AI_PROVIDER=
 AI_API_KEY=
+AI_MODEL=
 ```
 
 Do not add real secrets until backend, Supabase, and AI work begins.

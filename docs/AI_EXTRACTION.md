@@ -119,14 +119,26 @@ Current environment variables:
 
 - `AI_PROVIDER`
 - `AI_API_KEY`
+- `AI_MODEL`
 
 Supported behavior now:
 
 - `AI_PROVIDER=openai`: uses server-side OpenAI Responses API call
+- `AI_PROVIDER=gemini`: uses server-side Google Gemini `generateContent` call with JSON response mode
 - `AI_PROVIDER=mock`: uses safe local mock extraction
 - no provider configured:
   - in development: safe mock extraction is used
   - outside development: route returns a configuration error
+
+Recommended production examples:
+
+- `AI_PROVIDER=gemini`
+- `AI_MODEL=gemini-2.5-flash`
+
+or:
+
+- `AI_PROVIDER=openai`
+- `AI_MODEL=gpt-4o-mini`
 
 No secrets are hardcoded in the repository.
 
