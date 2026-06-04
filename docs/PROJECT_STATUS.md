@@ -4,7 +4,7 @@ Last updated: 2026-06-04
 
 ## Current Phase
 
-SATOMI is currently in Phase 15 - Transactions and Smart Pockets Supabase integration.
+SATOMI is currently in Phase 16 - Goals and Bills Supabase integration.
 
 The safest interpretation is:
 
@@ -17,7 +17,8 @@ The safest interpretation is:
 - Phase 13 initial Supabase SQL schema is created.
 - Phase 14 Supabase client and auth foundation is implemented locally.
 - Phase 15 transactions, pockets, pocket detail, and dashboard Supabase integration is implemented locally.
-- Goals, bills, AI extraction, route handlers, production verification, and Android wrapper work are not started yet.
+- Phase 16 goals, goal detail, bills, and dashboard goal/bill integration is implemented locally.
+- AI extraction, route handlers, deeper profile persistence, production verification, and Android wrapper work are not started yet.
 
 ## Project Shape
 
@@ -141,18 +142,21 @@ Data integration now exists:
 - direct Supabase-authenticated transactions CRUD
 - direct Supabase-authenticated pockets CRUD
 - safe pocket delete guard from the UI
+- direct Supabase-authenticated goals CRUD
+- goal detail page data from Supabase
+- direct Supabase-authenticated bills CRUD
+- bill paid-state update from the UI
 - real pocket detail page data
-- dashboard summary, recent transactions, and pocket overview from Supabase
+- dashboard summary, recent transactions, pocket overview, goal progress, and due-soon bills from Supabase
 
 Still not done yet:
 
 - no profile settings page persistence
-- no goals CRUD
-- no bills CRUD
 - no route handlers
 - no logout surface
 - no password update page
 - no live verification against a real Supabase project yet
+- transactions and pockets edit surfaces still use older raw form primitives compared with the new goals/bills dialogs
 
 ## Known Risks And Remaining Work
 
@@ -177,7 +181,7 @@ npm run lint
 npm run build
 ```
 
-These commands passed again after Phase 15 transactions and pockets integration changes.
+These commands passed again after Phase 16 goals and bills integration changes.
 
 Also verified locally on `http://localhost:3002` during deployment-readiness:
 
@@ -190,14 +194,14 @@ Also verified locally on `http://localhost:3002` during deployment-readiness:
 
 ## Next Recommended Task
 
-Expand authenticated finance coverage beyond transactions and pockets.
+Stabilize the authenticated finance surfaces that now cover transactions, pockets, goals, and bills.
 
 The next phase should:
 
-1. verify Phase 15 flows against the live Supabase project on Vercel
+1. verify Phase 16 flows against the live Supabase project on Vercel
 2. connect profile settings persistence
-3. connect goals
-4. connect bills
-5. enrich dashboard aggregation with those new sources
+3. modernize older transactions and pockets form primitives onto the same newer UI base
+4. consider a route-handler validation boundary where it adds real safety
+5. keep AI extraction, native notification work, and Capacitor out of scope until core finance CRUD is stable
 
 Do not implement AI extraction, Capacitor, notification reading, or service-role logic until the core finance CRUD surfaces are stable.

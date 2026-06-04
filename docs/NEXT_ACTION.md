@@ -1,12 +1,12 @@
 # SATOMI Next Action
 
-## Exact Next Prompt For Goals, Bills, And Profile Persistence
+## Exact Next Prompt For Profile Persistence And UI Modernization
 
 ```text
 Continue SATOMI.
 
 Current phase:
-Phase 16 - goals, bills, and profile persistence.
+Phase 17 - profile persistence and finance form modernization.
 
 Read only:
 - docs/PROJECT_STATUS.md
@@ -14,20 +14,19 @@ Read only:
 - docs/AUTH_FLOW.md
 - docs/BACKEND_IMPLEMENTATION_PLAN.md
 - supabase/schema.sql
-- current /goals page
-- current /bills page
 - current /settings/persona
 - current /settings/privacy
-- current dashboard page
+- current /transactions page
+- current /pockets page
 
 Task:
-Extend Supabase integration beyond transactions and pockets.
+Stabilize the authenticated finance frontend after Phase 16.
 
 Implement:
 1. load and persist profile preferences where safe
-2. goals list/detail integration
-3. bills list integration
-4. dashboard summary improvements using goals and bills when available
+2. modernize transactions form controls onto the newer Radix/shadcn-style SATOMI primitives
+3. modernize pockets form controls onto the newer Radix/shadcn-style SATOMI primitives
+4. keep all current Supabase CRUD behavior intact
 
 Do not implement:
 - AI extraction
@@ -44,9 +43,9 @@ Run:
 After completion:
 - summarize changed files
 - list remaining dummy-data surfaces
-- explain how to test goals, bills, and settings persistence
+- explain how to test settings persistence, transactions, and pockets
 ```
 
 ## Why This Is Safest
 
-Transactions and pockets are now live. The next clean step is to widen the authenticated data surface while keeping the same Supabase/RLS pattern and avoiding AI or native complexity too early.
+Transactions, pockets, goals, and bills are now live. The next clean step is to stabilize settings persistence and bring the older finance editors onto the same more modern UI primitive base before widening scope again.

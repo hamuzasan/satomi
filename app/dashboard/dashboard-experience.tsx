@@ -10,11 +10,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { AppShell, GlassCard, LoadingState, StatCard } from "@/src/components/satomi";
-import {
-  billsDueSoon,
-  dashboardGoal,
-  type DashboardTone,
-} from "@/src/lib/satomi-dashboard-data";
+import { type DashboardTone } from "@/src/lib/satomi-dashboard-data";
 import {
   buildDashboardPockets,
   buildDashboardRecentTransactions,
@@ -22,6 +18,11 @@ import {
   buildPocketNudge,
   mapPocketRowToRecord,
 } from "@/src/lib/satomi-finance";
+import {
+  buildDashboardBillsDueSoon,
+  buildDashboardGoal,
+  getDashboardGoalTone,
+} from "@/src/lib/satomi-goals-bills";
 import { useFinanceSnapshot } from "@/src/lib/supabase/use-finance-snapshot";
 import { cn } from "@/src/lib/utils";
 
@@ -95,6 +96,10 @@ export function DashboardExperience() {
   const pocketNameById = new Map(pockets.map((pocket) => [pocket.id, pocket.name]));
   const recentTransactions = buildDashboardRecentTransactions(transactions, pocketNameById);
   const nudgeMessage = buildPocketNudge(pocketRecords);
+  const goals = snapshot?.goals ?? [];
+  const bills = snapshot?.bills ?? [];
+  const dashboardGoal = buildDashboardGoal(goals);
+  const billsDueSoon = buildDashboardBillsDueSoon(bills, pockets);
   const profileName = snapshot?.profileName?.trim() || "Kamu";
   const budgetLeft = summary[2]?.value ?? "Rp0";
   const income = summary[0]?.value ?? "Rp0";
@@ -296,49 +301,66 @@ export function DashboardExperience() {
                   Target Finansial
                 </p>
                 <h2 className="mt-2 text-xl font-semibold text-satomi-text">
-                  {dashboardGoal.name}
+                  {dashboardGoal?.name ?? "Belum ada goal"}
                 </h2>
               </div>
               <Goal className="size-7 text-satomi-cyan-pale" />
             </div>
-            <div className="flex items-end justify-between gap-4">
-              <p className="font-display text-4xl font-extrabold text-satomi-text">
-                {dashboardGoal.progress}%
-              </p>
-              <p className="text-right text-sm text-satomi-muted">
-                {dashboardGoal.amount}
-                <br />/ {dashboardGoal.target}
-              </p>
-            </div>
-            <div className="mt-4 h-3 overflow-hidden rounded-full bg-white/12">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-satomi-cyan to-satomi-purple shadow-[0_0_18px_rgba(0,240,255,0.32)]"
-                style={{ width: `${dashboardGoal.progress}%` }}
-              />
-            </div>
+            {dashboardGoal ? (
+              <>
+                <div className="flex items-end justify-between gap-4">
+                  <p className="font-display text-4xl font-extrabold text-satomi-text">
+                    {dashboardGoal.progress}%
+                  </p>
+                  <p className="text-right text-sm text-satomi-muted">
+                    {dashboardGoal.amount}
+                    <br />/ {dashboardGoal.target}
+                  </p>
+                </div>
+                <div className="mt-4 h-3 overflow-hidden rounded-full bg-white/12">
+                  <div
+                    className={cn(
+                      "h-full rounded-full shadow-[0_0_18px_rgba(0,240,255,0.32)]",
+                      toneBg[getDashboardGoalTone(dashboardGoal.progress)],
+                    )}
+                    style={{ width: `${dashboardGoal.progress}%` }}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-satomi-muted">
+                Tambahkan goal pertama supaya Satomi bisa menampilkan progres target finansial di dashboard.
+              </div>
+            )}
           </GlassCard>
 
           <DashboardSection title="Tagihan Terdekat">
             <div className="grid gap-3">
-              {billsDueSoon.map((bill) => (
-                <div
-                  key={bill.name}
-                  className="rounded-2xl border border-white/10 bg-black/20 p-4"
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-satomi-amber/12 text-satomi-amber">
-                      <ReceiptText className="size-5" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-satomi-text">{bill.name}</p>
-                      <p className="mt-1 text-sm text-satomi-muted">{bill.due}</p>
-                    </div>
-                    <p className="whitespace-nowrap font-semibold text-satomi-text">
-                      {bill.amount}
-                    </p>
-                  </div>
+              {billsDueSoon.length === 0 ? (
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-satomi-muted">
+                  Belum ada tagihan aktif. Tambahkan tagihan rutin agar Satomi bisa mengingatkan jatuh tempo terdekat.
                 </div>
-              ))}
+              ) : (
+                billsDueSoon.map((bill) => (
+                  <div
+                    key={`${bill.name}-${bill.amount}`}
+                    className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-satomi-amber/12 text-satomi-amber">
+                        <ReceiptText className="size-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-semibold text-satomi-text">{bill.name}</p>
+                        <p className="mt-1 text-sm text-satomi-muted">{bill.due}</p>
+                      </div>
+                      <p className="whitespace-nowrap font-semibold text-satomi-text">
+                        {bill.amount}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </DashboardSection>
         </aside>
