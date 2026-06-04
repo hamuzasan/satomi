@@ -4,7 +4,7 @@ Last updated: 2026-06-04
 
 ## Current Phase
 
-SATOMI is currently in Phase 17 - Dashboard aggregation and insights.
+SATOMI is currently in Phase 18 - AI transaction extraction.
 
 The safest interpretation is:
 
@@ -19,7 +19,8 @@ The safest interpretation is:
 - Phase 15 transactions, pockets, pocket detail, and dashboard Supabase integration is implemented locally.
 - Phase 16 goals, goal detail, bills, and dashboard goal/bill integration is implemented locally.
 - Phase 17 dashboard monthly aggregation and insights integration is implemented locally.
-- AI extraction, route handlers, deeper profile persistence, production verification, and Android wrapper work are not started yet.
+- Phase 18 preview-first AI transaction extraction is implemented locally.
+- deeper profile persistence, broader route-handler coverage, production AI verification, and Android wrapper work are not started yet.
 
 ## Project Shape
 
@@ -141,6 +142,7 @@ Data integration now exists:
 
 - `docs/DATA_INTEGRATION.md`
 - `docs/DASHBOARD_AGGREGATION.md`
+- `docs/AI_EXTRACTION.md`
 - direct Supabase-authenticated transactions CRUD
 - direct Supabase-authenticated pockets CRUD
 - safe pocket delete guard from the UI
@@ -151,16 +153,19 @@ Data integration now exists:
 - real pocket detail page data
 - dashboard summary, recent transactions, pocket overview, goal progress, and due-soon bills from Supabase
 - insights category breakdown, weekly trend, top categories, and nudge history from Supabase-backed data
+- preview-first `/api/chat/extract` route with server validation
+- chat UI extraction preview, clarification, and nudge warning flow
 
 Still not done yet:
 
 - no profile settings page persistence
-- no route handlers
+- no broader finance route-handler CRUD layer yet
 - no logout surface
 - no password update page
 - no live verification against a real Supabase project yet
 - transactions and pockets edit surfaces still use older raw form primitives compared with the new goals/bills dialogs
 - dashboard and insights aggregation is still client-side only
+- AI preview confirmation still saves through the client flow instead of a dedicated server confirm route
 
 ## Known Risks And Remaining Work
 
@@ -185,7 +190,7 @@ npm run lint
 npm run build
 ```
 
-These commands passed again after Phase 17 dashboard and insights aggregation changes.
+These commands passed again after Phase 18 AI transaction extraction changes.
 
 Also verified locally on `http://localhost:3002` during deployment-readiness:
 
@@ -198,14 +203,14 @@ Also verified locally on `http://localhost:3002` during deployment-readiness:
 
 ## Next Recommended Task
 
-Stabilize the authenticated finance surfaces that now cover transactions, pockets, goals, bills, dashboard aggregation, and insights.
+Stabilize the authenticated finance surfaces that now cover transactions, pockets, goals, bills, dashboard aggregation, insights, and AI preview extraction.
 
 The next phase should:
 
-1. verify Phase 17 flows against the live Supabase project on Vercel
+1. verify Phase 18 flows against the live Supabase project on Vercel
 2. connect profile settings persistence
 3. modernize older transactions and pockets form primitives onto the same newer UI base
-4. consider a route-handler validation boundary where it adds real safety
-5. keep AI extraction, native notification work, and Capacitor out of scope until core finance CRUD is stable
+4. add a dedicated confirm-save route for AI extraction previews
+5. keep native notification work and Capacitor out of scope until core finance CRUD is stable
 
 Do not implement AI extraction, Capacitor, notification reading, or service-role logic until the core finance CRUD surfaces are stable.

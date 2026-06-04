@@ -1,20 +1,30 @@
 import { AlertTriangle, SlidersHorizontal, XCircle } from "lucide-react";
 
-type NudgeWarning = {
+export type NudgeWarning = {
   title: string;
   budget: string;
   usedBefore: string;
   currentTransaction: string;
   estimatedTotal: string;
   overBy: string;
+  note?: string | null;
 };
 
 type NudgeWarningCardProps = {
   warning: NudgeWarning;
+  isSaving?: boolean;
+  onConfirm?: () => void;
   onEdit?: () => void;
+  onCancel?: () => void;
 };
 
-export function NudgeWarningCard({ warning, onEdit }: NudgeWarningCardProps) {
+export function NudgeWarningCard({
+  warning,
+  isSaving = false,
+  onConfirm,
+  onEdit,
+  onCancel,
+}: NudgeWarningCardProps) {
   return (
     <div className="relative overflow-hidden rounded-3xl border border-satomi-error/35 bg-satomi-error-deep/18 p-5 shadow-[0_0_42px_rgba(255,180,171,0.15)] backdrop-blur-2xl md:p-6">
       <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-satomi-error to-transparent" />
@@ -53,20 +63,27 @@ export function NudgeWarningCard({ warning, onEdit }: NudgeWarningCardProps) {
                 {warning.estimatedTotal}
               </p>
               <p className="font-mono text-xs text-satomi-error/80">
-                Over {warning.overBy}
+                Selisih {warning.overBy}
               </p>
             </div>
           </div>
+          {warning.note ? (
+            <p className="mt-4 text-sm leading-6 text-satomi-muted">{warning.note}</p>
+          ) : null}
         </div>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <WarningButton>Tetap Simpan</WarningButton>
-          <WarningButton onClick={onEdit}>Ubah Kategori</WarningButton>
-          <WarningButton muted>
+          <WarningButton onClick={onConfirm} disabled={!onConfirm || isSaving}>
+            {isSaving ? "Menyimpan" : "Tetap Simpan"}
+          </WarningButton>
+          <WarningButton onClick={onEdit} disabled={!onEdit || isSaving}>
+            Ubah Kategori
+          </WarningButton>
+          <WarningButton muted onClick={onCancel} disabled={!onCancel || isSaving}>
             <XCircle className="size-4" />
             Batalkan
           </WarningButton>
-          <WarningButton muted>
+          <WarningButton muted disabled>
             <SlidersHorizontal className="size-4" />
             Atur Budget
           </WarningButton>
@@ -107,19 +124,22 @@ function WarningButton({
   children,
   muted,
   onClick,
+  disabled,
 }: {
   children: React.ReactNode;
   muted?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       className={
         muted
-          ? "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-satomi-surface-high/70 px-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-satomi-muted transition hover:text-satomi-text"
-          : "inline-flex min-h-12 items-center justify-center rounded-2xl border border-satomi-error/50 bg-satomi-error/5 px-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-satomi-error transition hover:bg-satomi-error/10"
+          ? "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-satomi-surface-high/70 px-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-satomi-muted transition hover:text-satomi-text disabled:cursor-not-allowed disabled:opacity-55"
+          : "inline-flex min-h-12 items-center justify-center rounded-2xl border border-satomi-error/50 bg-satomi-error/5 px-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-satomi-error transition hover:bg-satomi-error/10 disabled:cursor-not-allowed disabled:opacity-55"
       }
     >
       {children}

@@ -23,14 +23,20 @@ export type TransactionPreview = {
 type TransactionPreviewCardProps = {
   transaction: TransactionPreview;
   compact?: boolean;
+  isSaving?: boolean;
+  onSave?: () => void;
   onEdit?: () => void;
+  onCancel?: () => void;
   className?: string;
 };
 
 export function TransactionPreviewCard({
   transaction,
   compact = false,
+  isSaving = false,
+  onSave,
   onEdit,
+  onCancel,
   className,
 }: TransactionPreviewCardProps) {
   return (
@@ -93,14 +99,17 @@ export function TransactionPreviewCard({
         <div className="mt-5 grid grid-cols-3 gap-2">
           <button
             type="button"
+            onClick={onSave}
+            disabled={!onSave || isSaving}
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-satomi-cyan px-3 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-satomi-bg transition hover:bg-satomi-cyan-soft"
           >
             <CheckCircle2 className="size-4" />
-            Simpan
+            {isSaving ? "Menyimpan" : "Simpan"}
           </button>
           <button
             type="button"
             onClick={onEdit}
+            disabled={!onEdit || isSaving}
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-satomi-cyan/35 bg-black/20 px-3 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-satomi-cyan transition hover:bg-satomi-cyan/10"
           >
             <Pencil className="size-4" />
@@ -108,6 +117,8 @@ export function TransactionPreviewCard({
           </button>
           <button
             type="button"
+            onClick={onCancel}
+            disabled={!onCancel || isSaving}
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-satomi-surface-high/70 px-3 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-satomi-muted transition hover:text-satomi-text"
           >
             <XCircle className="size-4" />

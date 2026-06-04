@@ -15,6 +15,7 @@ export type TransactionInput = {
   pocket_id: string | null;
   description: string;
   transaction_date: string;
+  source?: "chat" | "manual" | "notification";
 };
 
 export type PocketInput = {
@@ -169,6 +170,10 @@ function validateTransactionInput(input: TransactionInput) {
   if (!input.transaction_date) {
     throw new Error("Tanggal transaksi wajib diisi.");
   }
+
+  if (input.source && !["chat", "manual", "notification"].includes(input.source)) {
+    throw new Error("Sumber transaksi tidak valid.");
+  }
 }
 
 function validatePocketInput(input: PocketInput) {
@@ -243,7 +248,7 @@ export async function createTransaction(
     pocket_id: input.pocket_id,
     description: input.description.trim(),
     transaction_date: input.transaction_date,
-    source: "manual",
+    source: input.source ?? "manual",
   };
 
   const { data, error } = await supabase
@@ -276,7 +281,7 @@ export async function updateTransaction(
     pocket_id: input.pocket_id,
     description: input.description.trim(),
     transaction_date: input.transaction_date,
-    source: "manual",
+    source: input.source ?? "manual",
   };
 
   const { data, error } = await supabase

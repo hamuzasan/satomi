@@ -4,7 +4,7 @@ Last updated: 2026-06-04
 
 ## Scope
 
-Phase 17 now connects the main authenticated finance data flows directly from the frontend to Supabase:
+Phase 18 now connects the main authenticated finance data flows directly from the frontend to Supabase:
 
 - transactions CRUD
 - pockets CRUD
@@ -16,24 +16,23 @@ Phase 17 now connects the main authenticated finance data flows directly from th
 - dashboard summary, recent transactions, and pocket overview
 - dashboard goal progress and bills due soon
 - insights category, weekly trend, top-category, and nudge-history aggregation
+- preview-first AI extraction route for chat
 
 This phase still does **not** implement:
 
-- AI extraction
 - notification candidates
-- Next.js API route handlers
 - service-role server actions
 
 ## Runtime Approach
 
-For this phase, SATOMI reads and writes data directly with the authenticated Supabase browser client.
+For this phase, SATOMI mostly reads and writes data directly with the authenticated Supabase browser client.
 
 That means:
 
 - user identity comes from the Supabase session
 - RLS remains the main ownership boundary
 - no `SUPABASE_SERVICE_ROLE_KEY` is exposed
-- no `/api/*` layer is required yet
+- one server route now exists for preview-only AI extraction: `/api/chat/extract`
 
 ## Tables Used
 
@@ -86,6 +85,13 @@ Used for:
 - delete bill
 - mark bill as paid
 - dashboard bills due soon panel
+
+### `ai_extractions`
+
+Used for:
+
+- best-effort extraction preview logging
+- raw chat extraction input history when logging succeeds
 
 ## UI Mapping Strategy
 
@@ -164,14 +170,14 @@ Current behavior is safe because:
 
 If transactions or pockets move into `/api/*` routes later, those responses must keep `Cache-Control: no-store`.
 
-## Remaining Gaps After Phase 16
+## Remaining Gaps After Phase 18
 
 - no optimistic cross-page data sync beyond refresh
 - no logout UI yet
 - no profile settings persistence UI yet
-- no AI-assisted transaction extraction
 - no route-handler validation layer yet
 - transactions and pockets forms still need the same modern primitive upgrade applied to goals and bills
+- AI preview confirmation still saves through the client instead of a dedicated confirm route
 
 ## Recommended Next Step
 
